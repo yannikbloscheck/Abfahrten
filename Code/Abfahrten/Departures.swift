@@ -133,6 +133,8 @@ struct Departures {
         do {
             let departuresHtml = try String(contentsOf: url, encoding: String.Encoding.isoLatin1)
             
+            station = departuresHtml.components(separatedBy: "<div class=\"inputtbl\">\n<div class=\"fline stdpadding\">\n<span class=\"bold\">\n")[1].components(separatedBy: " - Aktuell")[0]
+            
             var departures = departuresHtml.components(separatedBy: "<div class=\"sqdetailsDep trow\">\n")
             
             if  departures[0].components(separatedBy: "<span class=\"bold\">\n").count > 0 {
