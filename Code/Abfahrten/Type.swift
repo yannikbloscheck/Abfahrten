@@ -17,6 +17,10 @@ enum Type: Int {
     
     
     // MARK: - Main
+    
+    /// Get the name of the type of transportation
+    ///
+    /// - Returns: Name of the type
     func name() -> String {
         switch self {
         case .countryTrain:
@@ -35,6 +39,9 @@ enum Type: Int {
     }
     
     
+    /// Get a glyph for the type of transportation
+    ///
+    /// - Returns: Glyph for the type
     func glyph() -> UIImage {
         switch self {
         case .countryTrain:
@@ -53,9 +60,19 @@ enum Type: Int {
     }
     
     
+    /// Check if the description matches the type of transportation
+    ///
+    /// - Parameter description: A description of a connection
+    /// - Returns: `true` if the description matches the type of transportation or `false` if not
     func matches(description: String) -> Bool {
         for term in terms() {
             if description.uppercased().contains(term.uppercased()) {
+                return true
+            }
+        }
+        
+        for term in terms() {
+            if description.uppercased().contains(term.uppercased().trimmingCharacters(in: .whitespacesAndNewlines)) {
                 return true
             }
         }
@@ -64,6 +81,9 @@ enum Type: Int {
     }
     
     
+    /// Get different terms, which describe the type of transportation
+    ///
+    /// - Returns: Terms descriping the type
     private func terms() -> [String] {
         switch self {
         case .countryTrain:
