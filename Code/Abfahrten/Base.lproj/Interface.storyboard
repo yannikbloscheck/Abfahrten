@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="s0h-31-uki">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="s0h-31-uki">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -39,7 +39,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0o1-gb-KTo" userLabel="Line">
-                                                    <rect key="frame" x="62" y="6" width="285" height="24"/>
+                                                    <rect key="frame" x="62" y="6" width="278" height="24"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="KAa-5t-2eY"/>
@@ -49,7 +49,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="shh-iS-rR6" userLabel="Direction">
-                                                    <rect key="frame" x="62" y="25" width="285" height="16"/>
+                                                    <rect key="frame" x="62" y="25" width="278" height="16"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="jR8-qX-AkX"/>
@@ -59,7 +59,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="1000" text="" textAlignment="right" lineBreakMode="headTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g01-cq-Qa8" userLabel="Platform">
-                                                    <rect key="frame" x="359" y="26" width="0.0" height="16"/>
+                                                    <rect key="frame" x="352" y="26" width="0.0" height="16"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="mua-YY-M4D"/>
@@ -69,7 +69,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" horizontalCompressionResistancePriority="1000" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2q8-C5-NYl" userLabel="Time">
-                                                    <rect key="frame" x="359" y="6" width="0.0" height="35"/>
+                                                    <rect key="frame" x="352" y="6" width="0.0" height="35"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="37P-jP-ONV" userLabel="height = 24 or 35"/>
@@ -149,7 +149,7 @@
                             <constraint firstItem="Dbd-za-orw" firstAttribute="leading" secondItem="Wuh-1M-mgy" secondAttribute="leading" id="iX2-py-cwh"/>
                             <constraint firstItem="eaD-Wo-zcr" firstAttribute="top" secondItem="xNk-hg-rS3" secondAttribute="bottom" id="kkt-Mh-DY2"/>
                             <constraint firstItem="Wuh-1M-mgy" firstAttribute="trailing" secondItem="Dbd-za-orw" secondAttribute="trailing" id="oqH-fu-G9s"/>
-                            <constraint firstItem="xNk-hg-rS3" firstAttribute="top" secondItem="cCe-We-Ugj" secondAttribute="top" constant="20" id="otS-oT-FAE"/>
+                            <constraint firstItem="xNk-hg-rS3" firstAttribute="top" secondItem="cCe-We-Ugj" secondAttribute="topMargin" id="otS-oT-FAE"/>
                             <constraint firstAttribute="bottom" secondItem="eaD-Wo-zcr" secondAttribute="bottom" constant="-10" id="wl8-DW-t3F"/>
                             <constraint firstItem="Dbd-za-orw" firstAttribute="centerY" secondItem="cCe-We-Ugj" secondAttribute="centerY" id="zE0-fA-lwo"/>
                         </constraints>
@@ -162,7 +162,7 @@
                     <connections>
                         <outlet property="noDepartures" destination="Dbd-za-orw" id="mE9-tS-JM4"/>
                         <outlet property="searchBar" destination="xNk-hg-rS3" id="XiZ-ND-MTR"/>
-                        <outlet property="table" destination="eaD-Wo-zcr" id="zPM-cl-I6e"/>
+                        <outlet property="tableView" destination="eaD-Wo-zcr" id="Wca-ur-ypD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m6j-eF-Yqd" userLabel="First Responder" sceneMemberID="firstResponder"/>

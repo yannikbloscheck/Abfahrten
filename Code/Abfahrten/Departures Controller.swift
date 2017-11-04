@@ -9,18 +9,38 @@ import CoreLocation
 /// - Since: 2017-10-15
 class DeparturesController: UIViewController, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate {
     // MARK: - Properties
+    
+    /// The location manager
     var locationManager: CLLocationManager!
-    @IBOutlet var searchBar: UISearchBar!
-    @IBOutlet var table: UITableView!
-    @IBOutlet var noDepartures: UILabel!
+    
+    /// A coordinate from which to find the nearest station
     var coordinate: CLLocationCoordinate2D!
+    
+    /// A station name to find
     var searchTerm: String! = ""
+    
+    /// The departures
     var departures: Departures!
+    
+    /// The timer for updating the departures
     var updateTimer: Timer = Timer()
+    
+    /// The search bar
+    @IBOutlet var searchBar: UISearchBar!
+    
+    /// The table view
+    @IBOutlet var tableView: UITableView!
+    
+    /// The label to display when there are no departures
+    @IBOutlet var noDepartures: UILabel!
     
     
     
     // MARK: - Initialization
+    
+    /// Initalize a departures controller
+    ///
+    /// - Parameter coder: A coder
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -49,6 +69,8 @@ class DeparturesController: UIViewController, UITableViewDataSource, UISearchBar
     
     
     // MARK: - Main
+    
+    /// Update the departures
     @IBAction func update() {
         if searchTerm.isEmpty {
             if let newCoordinate = locationManager.location?.coordinate {
@@ -68,23 +90,17 @@ class DeparturesController: UIViewController, UITableViewDataSource, UISearchBar
             }
         }
         
-        if departures.count < 1 {
-            noDepartures.isHidden = false
-        } else {
-            noDepartures.isHidden = true
-        }
-        
         if departures.count == 0 && UserDefaults.standard.integer(forKey: "Type Limit") != 6 {
             updateTypeLimit()
         } else {
             UIView.animate(withDuration: 0.5) {
-                self.table.reloadData()
-                self.table.refreshControl?.endRefreshing()
+                self.tableView.reloadData()
+                self.tableView.refreshControl?.endRefreshing()
             }
         }
     }
     
-    
+    /// Update the type limit
     @IBAction func updateTypeLimit() {
         if UserDefaults.standard.integer(forKey: "Type Limit") == 0 {
             UserDefaults.standard.set(6, forKey: "Type Limit")
@@ -93,7 +109,6 @@ class DeparturesController: UIViewController, UITableViewDataSource, UISearchBar
         }
         
         self.update()
-        
     }
     
     
@@ -108,7 +123,7 @@ class DeparturesController: UIViewController, UITableViewDataSource, UISearchBar
         refreshControl.tintColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
         refreshControl.backgroundColor = #colorLiteral(red: 0.9360449314, green: 0.9360449314, blue: 0.9360449314, alpha: 1)
         refreshControl.addTarget(self, action: #selector(update), for: UIControlEvents.valueChanged)
-        table.refreshControl = refreshControl
+        tableView.refreshControl = refreshControl
         
         updateTimer = Timer(timeInterval: 60, repeats: true, block: { (_) in
             self.update()
@@ -127,16 +142,37 @@ class DeparturesController: UIViewController, UITableViewDataSource, UISearchBar
     
     
     // MARK: - Table View Data Source
+    
+    /// Return the number of sections in the table view
+    ///
+    /// - Parameter tableView: The table view
+    /// - Returns: The number of sections
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     
+    /// Return the number of rows in a section of the table view
+    ///
+    /// - Parameter tableView: The table view
+    /// - Parameter section: The section
+    /// - Returns: The number of rows in a section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return departures.count
+        let count = departures.count
+        if count < 1 {
+            noDepartures.isHidden = false
+        } else {
+            noDepartures.isHidden = true
+        }
+        return count
     }
     
     
+    /// Create the cell for an index path
+    ///
+    /// - Parameter tableView: The table view
+    /// - Parameter indexPath: The index path
+    /// - Returns: The cell for a specific index path
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let departure = departures[indexPath.row]!
         
@@ -178,6 +214,10 @@ class DeparturesController: UIViewController, UITableViewDataSource, UISearchBar
     
     
     // MARK: - Search Bar Delegate
+    
+    /// Handle that the search button was clicked
+    ///
+    /// - Parameter searchBar: The search bar
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchTerm = searchBar.text
         searchBar.resignFirstResponder()
@@ -186,6 +226,9 @@ class DeparturesController: UIViewController, UITableViewDataSource, UISearchBar
     }
     
     
+    /// Handle that the cancel button was clicked
+    ///
+    /// - Parameter searchBar: The search bar
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         searchTerm = ""
@@ -196,12 +239,21 @@ class DeparturesController: UIViewController, UITableViewDataSource, UISearchBar
     
     
     // MARK: - Location Manager Delegate
+    
+    /// Handle new location data
+    ///
+    /// - Parameter manager: The location manager
+    /// - Parameter locations: The updated locations
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         coordinate = locations.last?.coordinate
         update()
     }
     
     
+    /// Handle an error while receiving locations
+    ///
+    /// - Parameter manager: The location manager
+    /// - Parameter error: The error
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {}
 }
 
