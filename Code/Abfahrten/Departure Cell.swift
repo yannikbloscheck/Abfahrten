@@ -8,10 +8,22 @@ import UIKit
 /// - Since: 2017-10-15
 class DepartureCell: UITableViewCell {
     // MARK: - Properties
+    
+    /// The height of the time label
     @IBOutlet var timeHeight: NSLayoutConstraint!
+    
+    /// The image for the type
     @IBOutlet var type: UIImageView!
+    
+    /// The line
     @IBOutlet var line: UILabel!
+    
+    /// The direction
     @IBOutlet var direction: UILabel!
+    
+    /// The time
     @IBOutlet var time: UILabel!
+    
+    /// The platform
     @IBOutlet var platform: UILabel!
 }
