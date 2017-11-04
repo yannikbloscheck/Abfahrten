@@ -8,8 +8,14 @@ import CoreLocation
 /// - Since: 2017-10-15
 struct Departures {
     // MARK: - Properties
-    private var departures: [Departure]! = []
+    
+    /// The name of the current station
     var station: String = ""
+    
+    /// The next departures
+    fileprivate var departures: [Departure]! = []
+    
+    /// The number of next departures
     var count: Int {
         return departures.count
     }
@@ -17,32 +23,129 @@ struct Departures {
     
     
     // MARK: - Initialization
+    
+    /// Initalize departures
+    ///
+    /// - Parameter searchTerm: A station name to find
+    /// - Parameter number: Number of departures to find
     init(searchTerm: String,  number: Int) {
         findDepartures(searchTerm: searchTerm, number: number, types: [.countryTrain, .regionTrain, .cityTrain, .underground, .tram, .bus])
     }
     
     
+    /// Initalize departures
+    ///
+    /// - Parameter searchTerm: A station name to find
+    /// - Parameter number: Number of departures to find
+    /// - Parameter type: A type of transportation to find
     init(searchTerm: String, number: Int, type: Type) {
         findDepartures(searchTerm: searchTerm, number: number, types: [type])
     }
     
     
+    /// Initalize departures
+    ///
+    /// - Parameter searchTerm: A station name to find
+    /// - Parameter number: Number of departures to find
+    /// - Parameter types: Types of transportation to find
     init(searchTerm: String, number: Int, types: [Type]) {
         findDepartures(searchTerm: searchTerm, number: number, types: types)
     }
     
     
+    /// Initalize departures
+    ///
+    /// - Parameter coordinate: A coordinate from which to find the nearest station
+    /// - Parameter number: Number of departures to find
     init(coordinate: CLLocationCoordinate2D,  number: Int) {
-        self.init(coordinate: coordinate, number: number, types: [.countryTrain, .regionTrain, .cityTrain, .underground, .tram, .bus])
+        findDepartures(coordinate: coordinate, number: number, types: [.countryTrain, .regionTrain, .cityTrain, .underground, .tram, .bus])
     }
     
     
+    /// Initalize departures
+    ///
+    /// - Parameter coordinate: A coordinate from which to find the nearest station
+    /// - Parameter number: Number of departures to find
+    /// - Parameter type: A type of transportation to find
     init(coordinate: CLLocationCoordinate2D, number: Int, type: Type) {
-        self.init(coordinate: coordinate, number: number, types: [type])
+        findDepartures(coordinate: coordinate, number: number, types: [type])
     }
     
-        
+    
+    /// Initalize departures
+    ///
+    /// - Parameter coordinate: A coordinate from which to find the nearest station
+    /// - Parameter number: Number of departures to find
+    /// - Parameter types: Types of transportation to find
     init(coordinate: CLLocationCoordinate2D, number: Int, types: [Type]) {
+        findDepartures(coordinate: coordinate, number: number, types: types)
+    }
+    
+    
+    
+    // MARK: - Main
+    
+    /// Get the departure at an index
+    ///
+    /// - Parameter index: An index for which to get the departure
+    /// - Returns: A departure if there is one
+    subscript(index: Int) -> Departure? {
+        if index <= departures.count-1 {
+            return departures[index]
+        } else {
+            return nil
+        }
+    }
+    
+    
+    /// Find departures
+    ///
+    /// - Parameter searchTerm: A station name to find
+    /// - Parameter number: Number of departures to find
+    /// - Parameter types: Types of transportation to find
+    fileprivate mutating func findDepartures(searchTerm: String, number: Int, types: [Type]) {
+        var newDepartures: [Departure]! = []
+        
+        var optimizedSearchTerm = searchTerm.replacingOccurrences(of: "Ä", with: "Ae").replacingOccurrences(of: "Ö", with: "Oe").replacingOccurrences(of: "Ü", with: "Ue").replacingOccurrences(of: "ä", with: "ae").replacingOccurrences(of: "ö", with: "oe").replacingOccurrences(of: "ü", with: "ue").replacingOccurrences(of: "ß", with: "ss")
+        if optimizedSearchTerm.lowercased() == "ennigerloh" {
+            optimizedSearchTerm = "Markt, Ennigerloh"
+        } else if optimizedSearchTerm.lowercased() == "beckum" {
+            optimizedSearchTerm = "Busbahnhof, Beckum"
+        } else if optimizedSearchTerm.lowercased() == "hafencity" {
+            optimizedSearchTerm = "Überseequartier, Hamburg"
+        }
+        let stationsPath = "https://reiseauskunft.bahn.de/bin/ajax-getstop.exe/dz?REQ0JourneyStopsS0A=1&REQ0JourneyStopsS0G=\(optimizedSearchTerm.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics) ?? optimizedSearchTerm.replacingOccurrences(of: " ", with: "%20"))"
+        
+        let stationsUrl = URL(string: stationsPath)!
+        do {
+            let stationsHtml = try String(contentsOf: stationsUrl, encoding: String.Encoding.ascii)
+            
+            if (stationsHtml.components(separatedBy: "extId\":\"").count > 0) {
+                let stationsId = stationsHtml.components(separatedBy: "extId\":\"")[1].components(separatedBy: "\"")[0]
+                
+                let departuresPath = "https://mobile.bahn.de/bin/mobil/bhftafel.exe/dox?evaId=\(stationsId)&bt=dep&max=\(number)&rt=1&use_realtime_filter=1&disableEquivs=yes&p=\(encode(types))&start=yes"
+                if let departuresUrl = URL(string: departuresPath) {
+                    newDepartures = parse(departuresUrl)
+                }
+            }
+        } catch {}
+        
+        if !newDepartures.isEmpty {
+            departures = newDepartures
+        } else if station == station.uppercased() {
+            findDepartures(searchTerm: searchTerm + " Hbf", number: number, types: types)
+        } else {
+            station = searchTerm
+        }
+    }
+    
+    
+    /// Find departures
+    ///
+    /// - Parameter coordinate: A coordinate from which to find the nearest station
+    /// - Parameter number: Number of departures to find
+    /// - Parameter types: Types of transportation to find
+    fileprivate mutating func findDepartures(coordinate: CLLocationCoordinate2D, number: Int, types: [Type]) {
         let latitudeParts = coordinate.latitude.description.components(separatedBy: ".")
         let latitudePart1 = latitudeParts[0]
         let latitudePart2 = latitudeParts[1] + "000000"
@@ -73,18 +176,11 @@ struct Departures {
     }
     
     
-    
-    // MARK: - Main
-    subscript(index: Int) -> Departure? {
-        if index <= departures.count-1 {
-            return departures[index]
-        } else {
-            return nil
-        }
-    }
-    
-    
-    private func encode(_ types: [Type]) -> String {
+    /// Encode the types of transportation
+    ///
+    /// - Parameter types: Types of transportation
+    /// - Returns: Types of transportation encoded in ones and zeros
+    fileprivate func encode(_ types: [Type]) -> String {
         var products = ""
         
         if types.contains(.countryTrain) {
@@ -127,7 +223,11 @@ struct Departures {
     }
     
     
-    private mutating func parse(_ url: URL) -> [Departure] {
+    /// Parse a website at an url to get the departures out of it
+    ///
+    /// - Parameter url: An url
+    /// - Returns: Multiple departures
+    fileprivate mutating func parse(_ url: URL) -> [Departure] {
         var newDepartures: [Departure]! = []
         
         do {
@@ -198,42 +298,5 @@ struct Departures {
         } catch {}
         
         return newDepartures
-    }
-    
-    
-    private mutating func findDepartures(searchTerm: String, number: Int, types: [Type]) {
-        var newDepartures: [Departure]! = []
-        
-        var optimizedSearchTerm = searchTerm.replacingOccurrences(of: "Ä", with: "Ae").replacingOccurrences(of: "Ö", with: "Oe").replacingOccurrences(of: "Ü", with: "Ue").replacingOccurrences(of: "ä", with: "ae").replacingOccurrences(of: "ö", with: "oe").replacingOccurrences(of: "ü", with: "ue").replacingOccurrences(of: "ß", with: "ss")
-        if optimizedSearchTerm.lowercased() == "ennigerloh" {
-            optimizedSearchTerm = "Markt, Ennigerloh"
-        } else if optimizedSearchTerm.lowercased() == "beckum" {
-            optimizedSearchTerm = "Busbahnhof, Beckum"
-        } else if optimizedSearchTerm.lowercased() == "hafencity" {
-            optimizedSearchTerm = "Überseequartier, Hamburg"
-        }
-        let stationsPath = "https://reiseauskunft.bahn.de/bin/ajax-getstop.exe/dz?REQ0JourneyStopsS0A=1&REQ0JourneyStopsS0G=\(optimizedSearchTerm.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics) ?? optimizedSearchTerm.replacingOccurrences(of: " ", with: "%20"))"
-        
-        let stationsUrl = URL(string: stationsPath)!
-        do {
-            let stationsHtml = try String(contentsOf: stationsUrl, encoding: String.Encoding.ascii)
-            
-            if (stationsHtml.components(separatedBy: "extId\":\"").count > 0) {
-                let stationsId = stationsHtml.components(separatedBy: "extId\":\"")[1].components(separatedBy: "\"")[0]
-                
-                let departuresPath = "https://mobile.bahn.de/bin/mobil/bhftafel.exe/dox?evaId=\(stationsId)&bt=dep&max=\(number)&rt=1&use_realtime_filter=1&disableEquivs=yes&p=\(encode(types))&start=yes"
-                if let departuresUrl = URL(string: departuresPath) {
-                    newDepartures = parse(departuresUrl)
-                }
-            }
-        } catch {}
-        
-        if !newDepartures.isEmpty {
-            departures = newDepartures
-        } else if station == station.uppercased() {
-            findDepartures(searchTerm: searchTerm + " Hbf", number: number, types: types)
-        } else {
-            station = searchTerm
-        }
     }
 }
