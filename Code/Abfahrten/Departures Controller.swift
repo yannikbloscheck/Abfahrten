@@ -237,6 +237,19 @@ class DeparturesController: UIViewController, UITableViewDataSource, UISearchBar
     }
     
     
+    /// Handle that text editing ended
+    ///
+    /// - Parameter searchBar: The search bar
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        if let searchText = searchBar.text, searchText.isEmpty {
+            searchBar.text = ""
+            searchTerm = ""
+            searchBar.resignFirstResponder()
+            update()
+        }
+    }
+    
+    
     
     // MARK: - Location Manager Delegate
     
