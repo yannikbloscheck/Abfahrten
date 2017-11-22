@@ -91,7 +91,8 @@ class DeparturesController: UIViewController, UITableViewDataSource, UISearchBar
         }
         
         if departures.count == 0 && UserDefaults.standard.integer(forKey: "Type Limit") != 6 {
-            updateTypeLimit()
+            UserDefaults.standard.set(6, forKey: "Type Limit")
+            self.update()
         } else {
             UIView.animate(withDuration: 0.5) {
                 self.tableView.reloadData()

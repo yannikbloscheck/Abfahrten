@@ -233,7 +233,12 @@ struct Departures {
         do {
             let departuresHtml = try String(contentsOf: url, encoding: String.Encoding.isoLatin1)
             
-            station = departuresHtml.components(separatedBy: "<div class=\"inputtbl\">\n<div class=\"fline stdpadding\">\n<span class=\"bold\">\n")[1].components(separatedBy: " - Aktuell")[0]
+            var departuresHtmlStation = departuresHtml.components(separatedBy: "<div class=\"inputtbl\">\n<div class=\"fline stdpadding\">\n<span class=\"bold\">\n")
+            if departuresHtmlStation.count > 1 && departuresHtmlStation[1].components(separatedBy: " - Aktuell").count > 1 {
+                station = departuresHtmlStation[1].components(separatedBy: " - Aktuell")[0]
+            } else {
+                return []
+            }
             
             var departures = departuresHtml.components(separatedBy: "<div class=\"sqdetailsDep trow\">\n")
             
