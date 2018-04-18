@@ -28,7 +28,7 @@ struct Departure: CustomStringConvertible, CustomDebugStringConvertible {
     
     /// A description of the departure
     var description: String {
-        var description = "Departure of \(line) with a \(type.name().lowercased()) to \(direction) at \(time)"
+        var description = "Departure of \(line) with a \(type.name.lowercased()) to \(direction) at \(time)"
         if delay > 1 {
             description = description + " with a delay of \(delay) minutes"
         }
@@ -40,7 +40,7 @@ struct Departure: CustomStringConvertible, CustomDebugStringConvertible {
     
     /// A description of the departure for debugging
     var debugDescription: String {
-        return "Departure of \"\(line)\" with a \"\(type.name())\" to \"\(direction)\" at \"\(time)\" with a delay of \"\(delay)\" minutes from platform \"\(platform)\""
+        return "Departure of \"\(line)\" with a \"\(type.name)\" to \"\(direction)\" at \"\(time)\" with a delay of \"\(delay)\" minutes from platform \"\(platform)\""
     }
     
     

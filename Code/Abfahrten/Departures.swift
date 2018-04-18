@@ -13,7 +13,7 @@ struct Departures {
     var station: String = ""
     
     /// The next departures
-    fileprivate var departures: [Departure]! = []
+    private var departures: [Departure]! = []
     
     /// The number of next departures
     var count: Int {
@@ -103,7 +103,7 @@ struct Departures {
     /// - Parameter searchTerm: A station name to find
     /// - Parameter number: Number of departures to find
     /// - Parameter types: Types of transportation to find
-    fileprivate mutating func findDepartures(searchTerm: String, number: Int, types: [Type]) {
+    private mutating func findDepartures(searchTerm: String, number: Int, types: [Type]) {
         var newDepartures: [Departure]! = []
         
         var optimizedSearchTerm = searchTerm.replacingOccurrences(of: "Ä", with: "Ae").replacingOccurrences(of: "Ö", with: "Oe").replacingOccurrences(of: "Ü", with: "Ue").replacingOccurrences(of: "ä", with: "ae").replacingOccurrences(of: "ö", with: "oe").replacingOccurrences(of: "ü", with: "ue").replacingOccurrences(of: "ß", with: "ss")
@@ -145,7 +145,7 @@ struct Departures {
     /// - Parameter coordinate: A coordinate from which to find the nearest station
     /// - Parameter number: Number of departures to find
     /// - Parameter types: Types of transportation to find
-    fileprivate mutating func findDepartures(coordinate: CLLocationCoordinate2D, number: Int, types: [Type]) {
+    private mutating func findDepartures(coordinate: CLLocationCoordinate2D, number: Int, types: [Type]) {
         let latitudeParts = coordinate.latitude.description.components(separatedBy: ".")
         let latitudePart1 = latitudeParts[0]
         let latitudePart2 = latitudeParts[1] + "000000"
@@ -180,7 +180,7 @@ struct Departures {
     ///
     /// - Parameter types: Types of transportation
     /// - Returns: Types of transportation encoded in ones and zeros
-    fileprivate func encode(_ types: [Type]) -> String {
+    private func encode(_ types: [Type]) -> String {
         var products = ""
         
         if types.contains(.countryTrain) {
@@ -227,7 +227,7 @@ struct Departures {
     ///
     /// - Parameter url: An url
     /// - Returns: Multiple departures
-    fileprivate mutating func parse(_ url: URL) -> [Departure] {
+    private mutating func parse(_ url: URL) -> [Departure] {
         var newDepartures: [Departure]! = []
         
         do {

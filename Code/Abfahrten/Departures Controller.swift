@@ -179,7 +179,7 @@ class DeparturesController: UIViewController, UITableViewDataSource, UISearchBar
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Departure", for: indexPath) as! DepartureCell
         
-        cell.type.image = departure.type.glyph()
+        cell.type.image = departure.type.glyph
         cell.line.text = departure.line
         cell.direction.text = departure.direction
         cell.time.text = departure.time
