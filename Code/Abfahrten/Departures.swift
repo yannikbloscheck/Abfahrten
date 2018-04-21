@@ -250,6 +250,12 @@ struct Departures {
             for departure in departures {
                 let departureHtml = departure.components(separatedBy: "<span class=\"bold\">")
                 
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "HH:mm"
+                
+                var time = departureHtml[2].components(separatedBy: "</span>")[0]
+                var date = dateFormatter.date(from: time)!
+                
                 var line = departureHtml[1].components(separatedBy: "</span>")[0]
                 let components = line.components(separatedBy: NSCharacterSet.whitespacesAndNewlines)
                 line = components.filter { !$0.isEmpty }.joined(separator: " ")
@@ -257,22 +263,28 @@ struct Departures {
                 var direction = departureHtml[1].components(separatedBy: "</a>\n&gt;&gt;\n")[1].components(separatedBy: "\n")[0]
                 direction = direction.replacingOccurrences(of: "&#196;", with: "Ä").replacingOccurrences(of: "&#214;", with: "Ö").replacingOccurrences(of: "&#220;", with: "Ü").replacingOccurrences(of: "&#223;", with: "ß").replacingOccurrences(of: "&#228;", with: "ä").replacingOccurrences(of: "&#246;", with: "ö").replacingOccurrences(of: "&#252;", with: "ü").replacingOccurrences(of: " (Bus+Tram)", with: "").replacingOccurrences(of: " (Airport)", with: "")
                 
-                var time = departureHtml[2].components(separatedBy: "</span>")[0]
                 var delay = 0
                 var delayTime = -60
-                if departureHtml[2].contains(">+")  {
-                    if let actualDelay = Int(departureHtml[2].components(separatedBy: ">+")[1].components(separatedBy: "</span>")[0]) {
-                        if actualDelay > 0 {
-                            delay = actualDelay
-                        }
-                        
-                        delayTime = delayTime + (actualDelay * 60)
+                if departureHtml[2].contains(">+"), let actualDelay = Int(departureHtml[2].components(separatedBy: ">+")[1].components(separatedBy: "</span>")[0]) {
+                    if actualDelay > 0 {
+                        delay = actualDelay
                     }
+                    
+                    delayTime = delayTime + (actualDelay * 60)
+                } else if departureHtml[2].contains("delayOnTime\">"), let actualDate = dateFormatter.date(from: departureHtml[2].components(separatedBy: "delayOnTime\">")[1].components(separatedBy: "</span>")[0]), let actualDelay = Calendar.current.dateComponents([.minute], from: date, to: actualDate).minute {
+                    if actualDelay > 0 {
+                        delay = actualDelay
+                    }
+                    
+                    delayTime = delayTime + (actualDelay * 60)
+                } else if departureHtml[2].contains("delay\">"), let actualDate = dateFormatter.date(from: departureHtml[2].components(separatedBy: "delay\">")[1].components(separatedBy: "</span>")[0]), let actualDelay = Calendar.current.dateComponents([.minute], from: date, to: actualDate).minute {
+                    if actualDelay > 0 {
+                        delay = actualDelay
+                    }
+                    
+                    delayTime = delayTime + (actualDelay * 60)
                 }
                 
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "HH:mm"
-                var date = dateFormatter.date(from: time)!
                 date.addTimeInterval(TimeInterval(delayTime))
                 time = dateFormatter.string(from: date)
                 

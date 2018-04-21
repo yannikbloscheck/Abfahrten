@@ -215,6 +215,19 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Departure", for: indexPath) as! DepartureCell
         
+        
+        if traitCollection.userInterfaceIdiom == .pad && self.view.bounds.size.width > 640 {
+            cell.line.font = cell.line.font.withSize(22)
+            cell.direction.font = cell.direction.font.withSize(14)
+            cell.time.font = cell.time.font.withSize(22)
+            cell.platform.font = cell.platform.font.withSize(14)
+        } else {
+            cell.line.font = cell.line.font.withSize(19)
+            cell.direction.font = cell.direction.font.withSize(12)
+            cell.time.font = cell.time.font.withSize(19)
+            cell.platform.font = cell.platform.font.withSize(12)
+        }
+        
         cell.type.image = departure.type.glyph
         cell.line.text = departure.line
         cell.direction.text = departure.direction
@@ -256,9 +269,9 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
     /// - Returns: The height for a cell at a specific index path
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if traitCollection.userInterfaceIdiom == .pad && self.view.bounds.size.width > 640 {
-            return 90
-        } else {
             return 70
+        } else {
+            return 60
         }
     }
     

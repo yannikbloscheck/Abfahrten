@@ -56,37 +56,37 @@
                                                             </constraints>
                                                         </imageView>
                                                         <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Ko-Wa-PVq" userLabel="Details">
-                                                            <rect key="frame" x="60" y="5" width="315" height="49"/>
+                                                            <rect key="frame" x="60" y="8" width="315" height="44"/>
                                                             <subviews>
-                                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="251" horizontalCompressionResistancePriority="950" text="Zug 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="AS8-jR-eLT">
-                                                                    <rect key="frame" x="10" y="0.0" width="219.5" height="29"/>
+                                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="600" horizontalCompressionResistancePriority="950" text="Zug 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="AS8-jR-eLT">
+                                                                    <rect key="frame" x="10" y="0.0" width="225" height="27"/>
                                                                     <color key="backgroundColor" name="Cell Background Color"/>
                                                                     <color key="tintColor" name="Tint Color"/>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                                     <color key="textColor" name="Tint Color"/>
                                                                     <color key="highlightedColor" name="Tint Color"/>
                                                                 </label>
-                                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="251" horizontalCompressionResistancePriority="950" text="Niemandsland" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="WZx-XE-BRl">
-                                                                    <rect key="frame" x="10" y="29" width="239" height="20"/>
+                                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="650" horizontalCompressionResistancePriority="950" text="Niemandsland" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="WZx-XE-BRl">
+                                                                    <rect key="frame" x="10" y="27" width="231" height="17"/>
                                                                     <color key="backgroundColor" name="Cell Background Color"/>
                                                                     <color key="tintColor" name="Tint Color"/>
-                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                                     <color key="textColor" name="Tint Color"/>
                                                                     <color key="highlightedColor" name="Tint Color"/>
                                                                 </label>
-                                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="900" verticalHuggingPriority="251" horizontalCompressionResistancePriority="900" text="00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="SZz-yt-k5q">
-                                                                    <rect key="frame" x="233.5" y="0.0" width="71.5" height="29"/>
+                                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="900" verticalHuggingPriority="700" horizontalCompressionResistancePriority="900" text="00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="SZz-yt-k5q">
+                                                                    <rect key="frame" x="239" y="0.0" width="66" height="26.5"/>
                                                                     <color key="backgroundColor" name="Cell Background Color"/>
                                                                     <color key="tintColor" name="Tint Color"/>
-                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                                     <color key="textColor" name="Tint Color"/>
                                                                     <color key="highlightedColor" name="Tint Color"/>
                                                                 </label>
-                                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="900" verticalHuggingPriority="251" horizontalCompressionResistancePriority="900" text="Gleis 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="psE-f4-ppF">
-                                                                    <rect key="frame" x="253" y="29" width="51" height="19.5"/>
+                                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="900" verticalHuggingPriority="750" horizontalCompressionResistancePriority="900" text="Gleis 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="psE-f4-ppF">
+                                                                    <rect key="frame" x="245" y="26.5" width="59" height="17"/>
                                                                     <color key="backgroundColor" name="Cell Background Color"/>
                                                                     <color key="tintColor" name="Tint Color"/>
-                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                                     <color key="textColor" name="Tint Color"/>
                                                                     <color key="highlightedColor" name="Tint Color"/>
                                                                 </label>
@@ -96,13 +96,14 @@
                                                             <constraints>
                                                                 <constraint firstItem="AS8-jR-eLT" firstAttribute="top" secondItem="6Ko-Wa-PVq" secondAttribute="top" id="0qa-XZ-WiC"/>
                                                                 <constraint firstAttribute="bottom" secondItem="psE-f4-ppF" secondAttribute="bottom" id="1FV-Qr-E1g"/>
-                                                                <constraint firstItem="psE-f4-ppF" firstAttribute="leading" secondItem="WZx-XE-BRl" secondAttribute="trailing" constant="4" id="37x-iS-iqv"/>
+                                                                <constraint firstItem="WZx-XE-BRl" firstAttribute="trailing" secondItem="SZz-yt-k5q" secondAttribute="leading" constant="2" id="37x-iS-iqv"/>
                                                                 <constraint firstItem="psE-f4-ppF" firstAttribute="top" secondItem="SZz-yt-k5q" secondAttribute="bottom" id="62d-az-iru"/>
                                                                 <constraint firstAttribute="trailing" secondItem="SZz-yt-k5q" secondAttribute="trailing" constant="10" id="C5P-Ga-iqn"/>
                                                                 <constraint firstItem="SZz-yt-k5q" firstAttribute="top" secondItem="6Ko-Wa-PVq" secondAttribute="top" id="CG8-bg-71i"/>
                                                                 <constraint firstAttribute="trailing" secondItem="psE-f4-ppF" secondAttribute="trailing" constant="11" id="CvT-Tl-uQt"/>
                                                                 <constraint firstItem="WZx-XE-BRl" firstAttribute="leading" secondItem="6Ko-Wa-PVq" secondAttribute="leading" constant="10.5" id="E2E-wI-cbu"/>
                                                                 <constraint firstItem="SZz-yt-k5q" firstAttribute="leading" secondItem="AS8-jR-eLT" secondAttribute="trailing" constant="4" id="HCc-dJ-dK0"/>
+                                                                <constraint firstItem="psE-f4-ppF" firstAttribute="leading" secondItem="WZx-XE-BRl" secondAttribute="trailing" constant="4" id="KdJ-K8-KLc"/>
                                                                 <constraint firstItem="WZx-XE-BRl" firstAttribute="top" secondItem="AS8-jR-eLT" secondAttribute="bottom" id="VMG-Qg-2PR"/>
                                                                 <constraint firstAttribute="bottom" secondItem="WZx-XE-BRl" secondAttribute="bottom" id="fhb-G8-X7K"/>
                                                                 <constraint firstItem="AS8-jR-eLT" firstAttribute="leading" secondItem="6Ko-Wa-PVq" secondAttribute="leading" constant="10" id="geQ-Ge-3AS"/>
@@ -115,8 +116,10 @@
                                                         <constraint firstAttribute="bottom" secondItem="4lC-hz-hlG" secondAttribute="bottom" id="EzZ-d1-7L0"/>
                                                         <constraint firstItem="4lC-hz-hlG" firstAttribute="leading" secondItem="fhi-p8-ZDA" secondAttribute="leading" id="LXO-AI-2Nb"/>
                                                         <constraint firstItem="6Ko-Wa-PVq" firstAttribute="leading" secondItem="4lC-hz-hlG" secondAttribute="trailing" id="RV1-50-DLg"/>
+                                                        <constraint firstItem="6Ko-Wa-PVq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fhi-p8-ZDA" secondAttribute="top" constant="4" id="bGv-Zh-gRy"/>
                                                         <constraint firstItem="6Ko-Wa-PVq" firstAttribute="centerY" secondItem="fhi-p8-ZDA" secondAttribute="centerY" id="mgh-mA-YBt"/>
                                                         <constraint firstAttribute="trailing" secondItem="6Ko-Wa-PVq" secondAttribute="trailing" id="u6j-N5-EWr"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6Ko-Wa-PVq" secondAttribute="bottom" constant="4" id="xFt-5J-AOL"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
