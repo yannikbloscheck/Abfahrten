@@ -22,7 +22,7 @@
                         <subviews>
                             <searchBar clipsSubviews="YES" contentMode="redraw" searchBarStyle="minimal" placeholder="Search" showsCancelButton="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xNk-hg-rS3" userLabel="Searchbar">
                                 <rect key="frame" x="0.0" y="20" width="375" height="56"/>
-                                <color key="backgroundColor" name="Searchbar Background Color"/>
+                                <color key="backgroundColor" name="Background Color"/>
                                 <color key="tintColor" name="Tint Color"/>
                                 <color key="barTintColor" name="Tint Color"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="light" returnKeyType="search" enablesReturnKeyAutomatically="YES" smartQuotesType="no"/>
@@ -44,7 +44,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhi-p8-ZDA" userLabel="Row">
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fhi-p8-ZDA" userLabel="Row">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4lC-hz-hlG" userLabel="Type">
@@ -67,10 +67,10 @@
                                                                     <color key="highlightedColor" name="Tint Color"/>
                                                                 </label>
                                                                 <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="251" horizontalCompressionResistancePriority="950" text="Niemandsland" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="WZx-XE-BRl">
-                                                                    <rect key="frame" x="10" y="29" width="240" height="20"/>
+                                                                    <rect key="frame" x="10" y="29" width="239" height="20"/>
                                                                     <color key="backgroundColor" name="Cell Background Color"/>
                                                                     <color key="tintColor" name="Tint Color"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                                     <color key="textColor" name="Tint Color"/>
                                                                     <color key="highlightedColor" name="Tint Color"/>
                                                                 </label>
@@ -83,10 +83,10 @@
                                                                     <color key="highlightedColor" name="Tint Color"/>
                                                                 </label>
                                                                 <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="900" verticalHuggingPriority="251" horizontalCompressionResistancePriority="900" text="Gleis 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="psE-f4-ppF">
-                                                                    <rect key="frame" x="254" y="29" width="50" height="19.5"/>
+                                                                    <rect key="frame" x="253" y="29" width="51" height="19.5"/>
                                                                     <color key="backgroundColor" name="Cell Background Color"/>
                                                                     <color key="tintColor" name="Tint Color"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                                     <color key="textColor" name="Tint Color"/>
                                                                     <color key="highlightedColor" name="Tint Color"/>
                                                                 </label>
@@ -146,7 +146,7 @@
                                     <outlet property="delegate" destination="s0h-31-uki" id="dwe-cr-d9B"/>
                                 </connections>
                             </tableView>
-                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Departure" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbd-za-orw" userLabel="No Departures">
+                            <label hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Departure" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbd-za-orw" userLabel="No Departures">
                                 <rect key="frame" x="0.0" y="323" width="375" height="21"/>
                                 <color key="backgroundColor" name="Background Color"/>
                                 <color key="tintColor" name="Tint Color"/>
@@ -157,13 +157,20 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="highlightedColor" name="Tint Color"/>
                             </label>
+                            <activityIndicatorView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ynj-U0-jHs" userLabel="Loading Departures">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="color" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" name="Searchbar Background Color"/>
+                        <color key="backgroundColor" name="Background Color"/>
                         <color key="tintColor" name="Tint Color"/>
                         <constraints>
                             <constraint firstItem="xNk-hg-rS3" firstAttribute="leading" secondItem="Wuh-1M-mgy" secondAttribute="leading" id="3w0-Wi-Jyq"/>
+                            <constraint firstItem="Ynj-U0-jHs" firstAttribute="centerY" secondItem="cCe-We-Ugj" secondAttribute="centerY" id="5MU-Py-kv9"/>
                             <constraint firstItem="eaD-Wo-zcr" firstAttribute="leading" secondItem="Wuh-1M-mgy" secondAttribute="leading" id="EgG-QO-9TE"/>
                             <constraint firstItem="Wuh-1M-mgy" firstAttribute="trailing" secondItem="eaD-Wo-zcr" secondAttribute="trailing" id="N2E-nl-jHm"/>
+                            <constraint firstItem="Ynj-U0-jHs" firstAttribute="centerX" secondItem="cCe-We-Ugj" secondAttribute="centerX" id="OCN-lq-HPb"/>
                             <constraint firstItem="Wuh-1M-mgy" firstAttribute="trailing" secondItem="xNk-hg-rS3" secondAttribute="trailing" id="Vgi-Qc-P6D"/>
                             <constraint firstItem="Dbd-za-orw" firstAttribute="leading" secondItem="Wuh-1M-mgy" secondAttribute="leading" id="iX2-py-cwh"/>
                             <constraint firstItem="eaD-Wo-zcr" firstAttribute="top" secondItem="xNk-hg-rS3" secondAttribute="bottom" id="kkt-Mh-DY2"/>
@@ -179,6 +186,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="loadingDepartures" destination="Ynj-U0-jHs" id="BoC-fa-qAi"/>
                         <outlet property="noDepartures" destination="Dbd-za-orw" id="mE9-tS-JM4"/>
                         <outlet property="searchBar" destination="xNk-hg-rS3" id="XiZ-ND-MTR"/>
                         <outlet property="tableView" destination="eaD-Wo-zcr" id="Wca-ur-ypD"/>
@@ -204,9 +212,6 @@
             <color red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Cell Background Color">
-            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="Searchbar Background Color">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Tint Color">

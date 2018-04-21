@@ -48,17 +48,17 @@ enum Type: Int {
         get {
             switch self {
             case .countryTrain:
-                return #imageLiteral(resourceName: "Country Train")
+                return #imageLiteral(resourceName: "Types/Country Train")
             case .regionTrain:
-                return #imageLiteral(resourceName: "Region Train")
+                return #imageLiteral(resourceName: "Types/Region Train")
             case .cityTrain:
-                return #imageLiteral(resourceName: "City Train")
+                return #imageLiteral(resourceName: "Types/City Train")
             case .underground:
-                return #imageLiteral(resourceName: "Underground")
+                return #imageLiteral(resourceName: "Types/Underground")
             case .tram:
-                return #imageLiteral(resourceName: "Tram")
+                return #imageLiteral(resourceName: "Types/Tram")
             case .bus:
-                return #imageLiteral(resourceName: "Bus")
+                return #imageLiteral(resourceName: "Types/Bus")
             }
         }
     }

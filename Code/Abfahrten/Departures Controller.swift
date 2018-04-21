@@ -31,6 +31,9 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
     /// The table view
     @IBOutlet var tableView: UITableView!
     
+    /// The indicator to display when there are departures loading
+    @IBOutlet var loadingDepartures: UIActivityIndicatorView!
+    
     /// The label to display when there are no departures
     @IBOutlet var noDepartures: UILabel!
     
@@ -58,8 +61,6 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
                 coordinate = currentCoordinate
             }
             
-            departures = Departures(coordinate: coordinate, number: 50)
-            
             if UserDefaults.standard.object(forKey: "Type Limit") == nil {
                 UserDefaults.standard.set(6, forKey: "Type Limit")
             }
@@ -72,34 +73,51 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
     
     /// Update the departures
     @IBAction func update() {
-        if searchTerm.isEmpty {
-            if let newCoordinate = locationManager.location?.coordinate {
-                coordinate = newCoordinate
+        updateWithTitle(false)
+    }
+    
+    
+    /// Update the departures with completion handler
+    private func updateWithTitle(_ updateTitle: Bool) {
+        DispatchQueue.global(qos: .userInteractive).async {
+            if self.searchTerm.isEmpty {
+                if let location = self.locationManager.location {
+                    self.coordinate = location.coordinate
+                }
+                
+                if UserDefaults.standard.integer(forKey: "Type Limit") == 6 {
+                    self.departures = Departures(coordinate: self.coordinate, number: 50)
+                } else {
+                    self.departures = Departures(coordinate: self.coordinate, number: 50, type: Type(rawValue: UserDefaults.standard.integer(forKey: "Type Limit"))!)
+                }
+            } else {
+                if UserDefaults.standard.integer(forKey: "Type Limit") == 6 {
+                    self.departures = Departures(searchTerm: self.searchTerm, number: 50)
+                } else {
+                    self.departures = Departures(searchTerm: self.searchTerm, number: 50, type: Type(rawValue: UserDefaults.standard.integer(forKey: "Type Limit"))!)
+                }
             }
             
-            if UserDefaults.standard.integer(forKey: "Type Limit") == 6 {
-                departures = Departures(coordinate: coordinate, number: 50)
-            } else {
-                departures = Departures(coordinate: coordinate, number: 50, type: Type(rawValue: UserDefaults.standard.integer(forKey: "Type Limit"))!)
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.5) {
+                    self.loadingDepartures.isHidden = true
+                    
+                    self.tableView.reloadData()
+                    self.tableView.refreshControl?.endRefreshing()
+                    
+                    if updateTitle {
+                        self.searchBar.text = self.departures.station
+                    }
+                }
             }
-        } else {
-            if UserDefaults.standard.integer(forKey: "Type Limit") == 6 {
-                departures = Departures(searchTerm: searchTerm, number: 50)
-            } else {
-                departures = Departures(searchTerm: searchTerm, number: 50, type: Type(rawValue: UserDefaults.standard.integer(forKey: "Type Limit"))!)
-            }
-        }
-        
-        if departures.count == 0 && UserDefaults.standard.integer(forKey: "Type Limit") != 6 {
-            UserDefaults.standard.set(6, forKey: "Type Limit")
-            self.update()
-        } else {
-            UIView.animate(withDuration: 0.5) {
-                self.tableView.reloadData()
-                self.tableView.refreshControl?.endRefreshing()
+            
+            if self.departures.count == 0 && UserDefaults.standard.integer(forKey: "Type Limit") != 6 {
+                UserDefaults.standard.set(6, forKey: "Type Limit")
+                self.update()
             }
         }
     }
+    
     
     /// Update the type limit
     @IBAction func updateTypeLimit() {
@@ -121,10 +139,15 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         
         let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
-        refreshControl.backgroundColor = #colorLiteral(red: 0.9360449314, green: 0.9360449314, blue: 0.9360449314, alpha: 1)
+        refreshControl.tintColor = UIColor.lightGray
+        refreshControl.backgroundColor = UIColor(named: "Background Color")!
         refreshControl.addTarget(self, action: #selector(update), for: UIControlEvents.valueChanged)
         tableView.refreshControl = refreshControl
+        
+        loadingDepartures.isHidden = false
+        noDepartures.isHidden = true
+        
+        departures = Departures(coordinate: coordinate, number: 50)
         
         updateTimer = Timer(timeInterval: 60, repeats: true, block: { (_) in
             self.update()
@@ -159,13 +182,19 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
     /// - Parameter section: The section
     /// - Returns: The number of rows in a section
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = departures.count
-        if count < 1 {
-            noDepartures.isHidden = false
-        } else {
+        if !loadingDepartures.isHidden {
             noDepartures.isHidden = true
+            
+            return 0
+        } else {
+            let count = departures.count
+            if count < 1 {
+                noDepartures.isHidden = false
+            } else {
+                noDepartures.isHidden = true
+            }
+            return count
         }
-        return count
     }
     
     
@@ -236,8 +265,12 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchTerm = searchBar.text
         searchBar.resignFirstResponder()
-        update()
-        searchBar.text = departures.station
+        
+        noDepartures.isHidden = true
+        loadingDepartures.isHidden = false
+        self.tableView.reloadData()
+        
+        updateWithTitle(true)
     }
     
     
@@ -248,6 +281,11 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
         searchBar.text = ""
         searchTerm = ""
         searchBar.resignFirstResponder()
+        
+        noDepartures.isHidden = true
+        loadingDepartures.isHidden = false
+        self.tableView.reloadData()
+        
         update()
     }
     
@@ -260,6 +298,11 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
             searchBar.text = ""
             searchTerm = ""
             searchBar.resignFirstResponder()
+            
+            noDepartures.isHidden = true
+            loadingDepartures.isHidden = false
+            self.tableView.reloadData()
+            
             update()
         }
     }
