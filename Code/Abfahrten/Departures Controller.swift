@@ -37,6 +37,13 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
     /// The label to display when there are no departures
     @IBOutlet var noDepartures: UILabel!
     
+    /// Keyboard shortcuts
+    override var keyCommands: [UIKeyCommand]? {
+        get {
+            return [UIKeyCommand(input: UIKeyInputEscape, modifierFlags: [], action: #selector(searchBarTextDidEndEditing))]
+        }
+    }
+    
     
     
     // MARK: - Initialization
@@ -264,7 +271,7 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
     /// - Parameter searchBar: The search bar
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchTerm = searchBar.text
-        searchBar.resignFirstResponder()
+        self.searchBar.resignFirstResponder()
         
         noDepartures.isHidden = true
         loadingDepartures.isHidden = false
@@ -278,9 +285,9 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
     ///
     /// - Parameter searchBar: The search bar
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
+        self.searchBar.text = ""
         searchTerm = ""
-        searchBar.resignFirstResponder()
+        self.searchBar.resignFirstResponder()
         
         noDepartures.isHidden = true
         loadingDepartures.isHidden = false
@@ -294,16 +301,18 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
     ///
     /// - Parameter searchBar: The search bar
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        if let searchText = searchBar.text, searchText.isEmpty {
-            searchBar.text = ""
+        if let searchText = self.searchBar.text, searchText.isEmpty {
+            self.searchBar.text = ""
             searchTerm = ""
-            searchBar.resignFirstResponder()
+            self.searchBar.resignFirstResponder()
             
             noDepartures.isHidden = true
             loadingDepartures.isHidden = false
             self.tableView.reloadData()
             
             update()
+        } else {
+            self.searchBar.resignFirstResponder()
         }
     }
     
