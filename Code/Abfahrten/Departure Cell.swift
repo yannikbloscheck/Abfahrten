@@ -9,9 +9,6 @@ import UIKit
 class DepartureCell: UITableViewCell {
     // MARK: - Properties
     
-    /// The height of the time label
-    @IBOutlet var timeHeight: NSLayoutConstraint!
-    
     /// The image for the type
     @IBOutlet var type: UIImageView!
     

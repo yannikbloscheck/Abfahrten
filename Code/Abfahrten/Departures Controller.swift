@@ -7,7 +7,7 @@ import CoreLocation
 ///
 /// - Copyright: © Yannik Bloscheck - All rights reserved
 /// - Since: 2017-10-15
-class DeparturesController: UIViewController, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate {
+class DeparturesController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, CLLocationManagerDelegate {
     // MARK: - Properties
     
     /// The location manager
@@ -185,23 +185,20 @@ class DeparturesController: UIViewController, UITableViewDataSource, UISearchBar
         cell.time.text = departure.time
         
         if departure.delay > 1 {
-            cell.time.textColor = #colorLiteral(red: 0.6167115654, green: 0.07720391789, blue: 0.007754685425, alpha: 1)
-            cell.platform.textColor = #colorLiteral(red: 0.6167115654, green: 0.07720391789, blue: 0.007754685425, alpha: 1)
+            cell.time.textColor = UIColor(named: "Alert Color")!
+            cell.platform.textColor = UIColor(named: "Alert Color")!
         } else {
-            cell.time.textColor = #colorLiteral(red: 0.01473352102, green: 0.1297693814, blue: 0.2014771978, alpha: 1)
-            cell.platform.textColor = #colorLiteral(red: 0.01473352102, green: 0.1297693814, blue: 0.2014771978, alpha: 1)
+            cell.time.textColor = UIColor(named: "Tint Color")!
+            cell.platform.textColor = UIColor(named: "Tint Color")!
         }
         
         if departure.platform.isEmpty {
             if departure.delay > 1 {
-                cell.timeHeight.constant = 24
                 cell.platform.text = "+\(departure.delay)"
             } else {
-                cell.timeHeight.constant = 35
                 cell.platform.text = ""
             }
         } else {
-            cell.timeHeight.constant = 24
             cell.platform.text = "Gleis " + departure.platform
             
             if departure.delay > 1 {
@@ -210,6 +207,23 @@ class DeparturesController: UIViewController, UITableViewDataSource, UISearchBar
         }
         
         return cell
+    }
+    
+    
+    
+    // MARK: - Table View Delegate
+    
+    /// Return the height for a cell in the table view
+    ///
+    /// - Parameter tableView: The table view
+    /// - Parameter indexPath: The index path
+    /// - Returns: The height for a cell at a specific index path
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if traitCollection.userInterfaceIdiom == .pad && self.view.bounds.size.width > 640 {
+            return 90
+        } else {
+            return 70
+        }
     }
     
     
