@@ -10,12 +10,14 @@
 		270B60461F93B4D100765078 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 270B60441F93B4D100765078 /* Interface.storyboard */; };
 		270B60481F93B4D100765078 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 270B60471F93B4D100765078 /* Assets.xcassets */; };
 		270B604B1F93B4D100765078 /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 270B60491F93B4D100765078 /* Launch.storyboard */; };
+		2787CAB620DAC56200776125 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2787CAB820DAC56200776125 /* Localizable.strings */; };
+		27A48BB420DAAEF90046DA41 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27A48BB320DAAEF90046DA41 /* Station.swift */; };
 		27ACFAAB1F93BC9C00F8B99C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27ACFAAA1F93BC9C00F8B99C /* CoreLocation.framework */; };
 		27CF4E481F93BBDB008BB776 /* Departure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF4E421F93BBDB008BB776 /* Departure.swift */; };
 		27CF4E491F93BBDB008BB776 /* Departures Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF4E431F93BBDB008BB776 /* Departures Controller.swift */; };
 		27CF4E4A1F93BBDB008BB776 /* Departure Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF4E441F93BBDB008BB776 /* Departure Cell.swift */; };
 		27CF4E4B1F93BBDB008BB776 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF4E451F93BBDB008BB776 /* Main.swift */; };
-		27CF4E4C1F93BBDB008BB776 /* Departures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF4E461F93BBDB008BB776 /* Departures.swift */; };
+		27CF4E4C1F93BBDB008BB776 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF4E461F93BBDB008BB776 /* Server.swift */; };
 		27CF4E4D1F93BBDB008BB776 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CF4E471F93BBDB008BB776 /* Type.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,13 +27,18 @@
 		270B60471F93B4D100765078 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		270B604A1F93B4D100765078 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Launch.storyboard; sourceTree = "<group>"; };
 		270B604C1F93B4D100765078 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2787CAB120DAC3ED00776125 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Interface.strings; sourceTree = "<group>"; };
+		2787CAB720DAC56200776125 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2787CAB920DAC56500776125 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		27A48BB320DAAEF90046DA41 /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		27ACFAAA1F93BC9C00F8B99C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		27CF4E421F93BBDB008BB776 /* Departure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Departure.swift; sourceTree = "<group>"; };
 		27CF4E431F93BBDB008BB776 /* Departures Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Departures Controller.swift"; sourceTree = "<group>"; };
 		27CF4E441F93BBDB008BB776 /* Departure Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Departure Cell.swift"; sourceTree = "<group>"; };
 		27CF4E451F93BBDB008BB776 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
-		27CF4E461F93BBDB008BB776 /* Departures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Departures.swift; sourceTree = "<group>"; };
+		27CF4E461F93BBDB008BB776 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		27CF4E471F93BBDB008BB776 /* Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
+		27E8DAC220D9F74800D6390E /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Interface.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,11 +76,13 @@
 				27CF4E451F93BBDB008BB776 /* Main.swift */,
 				27CF4E431F93BBDB008BB776 /* Departures Controller.swift */,
 				27CF4E441F93BBDB008BB776 /* Departure Cell.swift */,
-				27CF4E461F93BBDB008BB776 /* Departures.swift */,
+				27CF4E461F93BBDB008BB776 /* Server.swift */,
+				27A48BB320DAAEF90046DA41 /* Station.swift */,
 				27CF4E421F93BBDB008BB776 /* Departure.swift */,
 				27CF4E471F93BBDB008BB776 /* Type.swift */,
 				270B60441F93B4D100765078 /* Interface.storyboard */,
 				270B60471F93B4D100765078 /* Assets.xcassets */,
+				2787CAB820DAC56200776125 /* Localizable.strings */,
 				270B60491F93B4D100765078 /* Launch.storyboard */,
 				270B604C1F93B4D100765078 /* Info.plist */,
 			);
@@ -121,6 +130,7 @@
 				TargetAttributes = {
 					270B603C1F93B4D100765078 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -132,6 +142,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 270B60341F93B4D100765078;
 			productRefGroup = 270B603E1F93B4D100765078 /* Products */;
@@ -149,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				270B604B1F93B4D100765078 /* Launch.storyboard in Resources */,
+				2787CAB620DAC56200776125 /* Localizable.strings in Resources */,
 				270B60481F93B4D100765078 /* Assets.xcassets in Resources */,
 				270B60461F93B4D100765078 /* Interface.storyboard in Resources */,
 			);
@@ -181,8 +193,9 @@
 				27CF4E481F93BBDB008BB776 /* Departure.swift in Sources */,
 				27CF4E491F93BBDB008BB776 /* Departures Controller.swift in Sources */,
 				27CF4E4A1F93BBDB008BB776 /* Departure Cell.swift in Sources */,
-				27CF4E4C1F93BBDB008BB776 /* Departures.swift in Sources */,
+				27CF4E4C1F93BBDB008BB776 /* Server.swift in Sources */,
 				27CF4E4D1F93BBDB008BB776 /* Type.swift in Sources */,
+				27A48BB420DAAEF90046DA41 /* Station.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +206,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				270B60451F93B4D100765078 /* Base */,
+				27E8DAC220D9F74800D6390E /* de */,
+				2787CAB120DAC3ED00776125 /* en */,
 			);
 			name = Interface.storyboard;
 			sourceTree = "<group>";
@@ -205,6 +220,15 @@
 			name = Launch.storyboard;
 			sourceTree = "<group>";
 		};
+		2787CAB820DAC56200776125 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2787CAB720DAC56200776125 /* en */,
+				2787CAB920DAC56500776125 /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -212,6 +236,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -258,7 +283,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -271,6 +296,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -311,7 +337,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -329,7 +355,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yannikbloscheck.Abfahrten;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -344,7 +370,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yannikbloscheck.Abfahrten;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -21,7 +21,7 @@ import UIKit
     /// - Parameter application: The application
     /// - Parameter launchOptions: A dictionary indicating the reason the app was launched
     /// - Returns: `true` if the app should run or `false` if not
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         return true
     }
     

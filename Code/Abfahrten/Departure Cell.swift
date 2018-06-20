@@ -12,14 +12,18 @@ class DepartureCell: UITableViewCell {
     /// The image for the type
     @IBOutlet var type: UIImageView!
     
+    
     /// The line
     @IBOutlet var line: UILabel!
+    
     
     /// The direction
     @IBOutlet var direction: UILabel!
     
+    
     /// The time
     @IBOutlet var time: UILabel!
+    
     
     /// The platform
     @IBOutlet var platform: UILabel!

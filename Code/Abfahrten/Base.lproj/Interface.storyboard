@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="s0h-31-uki">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="s0h-31-uki">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -58,16 +57,16 @@
                                                         <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Ko-Wa-PVq" userLabel="Details">
                                                             <rect key="frame" x="60" y="8" width="315" height="44"/>
                                                             <subviews>
-                                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="600" horizontalCompressionResistancePriority="950" text="Zug 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="AS8-jR-eLT">
-                                                                    <rect key="frame" x="10" y="0.0" width="225" height="27"/>
+                                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="600" horizontalCompressionResistancePriority="950" text="Line 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="AS8-jR-eLT">
+                                                                    <rect key="frame" x="10" y="0.0" width="213" height="27"/>
                                                                     <color key="backgroundColor" name="Cell Background Color"/>
                                                                     <color key="tintColor" name="Tint Color"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                                     <color key="textColor" name="Tint Color"/>
                                                                     <color key="highlightedColor" name="Tint Color"/>
                                                                 </label>
-                                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="650" horizontalCompressionResistancePriority="950" text="Niemandsland" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="WZx-XE-BRl">
-                                                                    <rect key="frame" x="10" y="27" width="231" height="17"/>
+                                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="650" horizontalCompressionResistancePriority="950" text="Direction" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="WZx-XE-BRl">
+                                                                    <rect key="frame" x="10.5" y="27" width="218.5" height="17"/>
                                                                     <color key="backgroundColor" name="Cell Background Color"/>
                                                                     <color key="tintColor" name="Tint Color"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
@@ -75,15 +74,15 @@
                                                                     <color key="highlightedColor" name="Tint Color"/>
                                                                 </label>
                                                                 <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="900" verticalHuggingPriority="700" horizontalCompressionResistancePriority="900" text="00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="SZz-yt-k5q">
-                                                                    <rect key="frame" x="239" y="0.0" width="66" height="26.5"/>
+                                                                    <rect key="frame" x="227" y="0.0" width="78" height="27"/>
                                                                     <color key="backgroundColor" name="Cell Background Color"/>
                                                                     <color key="tintColor" name="Tint Color"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                                     <color key="textColor" name="Tint Color"/>
                                                                     <color key="highlightedColor" name="Tint Color"/>
                                                                 </label>
-                                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="900" verticalHuggingPriority="750" horizontalCompressionResistancePriority="900" text="Gleis 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="psE-f4-ppF">
-                                                                    <rect key="frame" x="245" y="26.5" width="59" height="17"/>
+                                                                <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="900" verticalHuggingPriority="750" horizontalCompressionResistancePriority="900" text="Platform 0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="psE-f4-ppF">
+                                                                    <rect key="frame" x="233" y="27" width="71" height="17"/>
                                                                     <color key="backgroundColor" name="Cell Background Color"/>
                                                                     <color key="tintColor" name="Tint Color"/>
                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
@@ -149,7 +148,7 @@
                                     <outlet property="delegate" destination="s0h-31-uki" id="dwe-cr-d9B"/>
                                 </connections>
                             </tableView>
-                            <label hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Departure" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbd-za-orw" userLabel="No Departures">
+                            <label hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Departures" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbd-za-orw" userLabel="No Departures">
                                 <rect key="frame" x="0.0" y="323" width="375" height="21"/>
                                 <color key="backgroundColor" name="Background Color"/>
                                 <color key="tintColor" name="Tint Color"/>

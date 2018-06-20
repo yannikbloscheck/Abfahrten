@@ -13,34 +13,43 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
     /// The location manager
     var locationManager: CLLocationManager!
     
+    
     /// A coordinate from which to find the nearest station
     var coordinate: CLLocationCoordinate2D!
+    
     
     /// A station name to find
     var searchTerm: String! = ""
     
+    
     /// The departures
-    var departures: Departures!
+    var station: Station? = nil
+    
     
     /// The timer for updating the departures
     var updateTimer: Timer = Timer()
     
+    
     /// The search bar
     @IBOutlet var searchBar: UISearchBar!
+    
     
     /// The table view
     @IBOutlet var tableView: UITableView!
     
+    
     /// The indicator to display when there are departures loading
     @IBOutlet var loadingDepartures: UIActivityIndicatorView!
+    
     
     /// The label to display when there are no departures
     @IBOutlet var noDepartures: UILabel!
     
+    
     /// Keyboard shortcuts
     override var keyCommands: [UIKeyCommand]? {
         get {
-            return [UIKeyCommand(input: UIKeyInputEscape, modifierFlags: [], action: #selector(searchBarTextDidEndEditing))]
+            return [UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(searchBarCancelButtonClicked(_:)))]
         }
     }
     
@@ -67,10 +76,6 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
             if let currentCoordinate = locationManager.location?.coordinate {
                 coordinate = currentCoordinate
             }
-            
-            if UserDefaults.standard.object(forKey: "Type Limit") == nil {
-                UserDefaults.standard.set(6, forKey: "Type Limit")
-            }
         }
     }
     
@@ -85,56 +90,48 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
     
     
     /// Update the departures with completion handler
-    private func updateWithTitle(_ updateTitle: Bool) {
+    private func updateWithTitle(_ includingTitle: Bool) {
         DispatchQueue.global(qos: .userInteractive).async {
             if self.searchTerm.isEmpty {
                 if let location = self.locationManager.location {
                     self.coordinate = location.coordinate
                 }
                 
-                if UserDefaults.standard.integer(forKey: "Type Limit") == 6 {
-                    self.departures = Departures(coordinate: self.coordinate, number: 50)
-                } else {
-                    self.departures = Departures(coordinate: self.coordinate, number: 50, type: Type(rawValue: UserDefaults.standard.integer(forKey: "Type Limit"))!)
-                }
-            } else {
-                if UserDefaults.standard.integer(forKey: "Type Limit") == 6 {
-                    self.departures = Departures(searchTerm: self.searchTerm, number: 50)
-                } else {
-                    self.departures = Departures(searchTerm: self.searchTerm, number: 50, type: Type(rawValue: UserDefaults.standard.integer(forKey: "Type Limit"))!)
-                }
-            }
-            
-            DispatchQueue.main.async {
-                UIView.animate(withDuration: 0.5) {
-                    self.loadingDepartures.isHidden = true
+                Server.station(for: self.coordinate, completion: { (station) in
+                    self.station = station
                     
-                    self.tableView.reloadData()
-                    self.tableView.refreshControl?.endRefreshing()
-                    
-                    if updateTitle {
-                        self.searchBar.text = self.departures.station
+                    DispatchQueue.main.async {
+                        UIView.animate(withDuration: 0.5) {
+                            self.loadingDepartures.isHidden = true
+                            
+                            self.tableView.reloadData()
+                            self.tableView.refreshControl?.endRefreshing()
+                            
+                            if includingTitle {
+                                self.searchBar.text = self.station?.name
+                            }
+                        }
                     }
-                }
-            }
-            
-            if self.departures.count == 0 && UserDefaults.standard.integer(forKey: "Type Limit") != 6 {
-                UserDefaults.standard.set(6, forKey: "Type Limit")
-                self.update()
+                })
+            } else {
+                Server.station(with: self.searchTerm, completion: { (station) in
+                    self.station = station
+                    
+                    DispatchQueue.main.async {
+                        UIView.animate(withDuration: 0.5) {
+                            self.loadingDepartures.isHidden = true
+                            
+                            self.tableView.reloadData()
+                            self.tableView.refreshControl?.endRefreshing()
+                            
+                            if includingTitle {
+                                self.searchBar.text = self.station?.name
+                            }
+                        }
+                    }
+                })
             }
         }
-    }
-    
-    
-    /// Update the type limit
-    @IBAction func updateTypeLimit() {
-        if UserDefaults.standard.integer(forKey: "Type Limit") == 0 {
-            UserDefaults.standard.set(6, forKey: "Type Limit")
-        } else {
-            UserDefaults.standard.set(UserDefaults.standard.integer(forKey: "Type Limit")-1, forKey: "Type Limit")
-        }
-        
-        self.update()
     }
     
     
@@ -148,18 +145,29 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor.lightGray
         refreshControl.backgroundColor = UIColor(named: "Background Color")!
-        refreshControl.addTarget(self, action: #selector(update), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action: #selector(update), for: UIControl.Event.valueChanged)
         tableView.refreshControl = refreshControl
         
         loadingDepartures.isHidden = false
         noDepartures.isHidden = true
         
-        departures = Departures(coordinate: coordinate, number: 50)
+        Server.station(for: coordinate, completion: { (station) in
+            self.station = station
+            
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.5) {
+                    self.loadingDepartures.isHidden = true
+                    
+                    self.tableView.reloadData()
+                    self.tableView.refreshControl?.endRefreshing()
+                }
+            }
+        })
         
         updateTimer = Timer(timeInterval: 60, repeats: true, block: { (_) in
             self.update()
         })
-        RunLoop.current.add(updateTimer, forMode: RunLoopMode.commonModes)
+        RunLoop.current.add(updateTimer, forMode: RunLoop.Mode.common)
         
         self.view.setNeedsLayout()
     }
@@ -193,14 +201,14 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
             noDepartures.isHidden = true
             
             return 0
+        } else if let station = self.station, station.departures.count > 0 {
+            noDepartures.isHidden = true
+            
+            return station.departures.count
         } else {
-            let count = departures.count
-            if count < 1 {
-                noDepartures.isHidden = false
-            } else {
-                noDepartures.isHidden = true
-            }
-            return count
+            noDepartures.isHidden = false
+            
+            return 0
         }
     }
     
@@ -211,51 +219,58 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
     /// - Parameter indexPath: The index path
     /// - Returns: The cell for a specific index path
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let departure = departures[indexPath.row]!
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Departure", for: indexPath) as! DepartureCell
-        
-        
-        if traitCollection.userInterfaceIdiom == .pad && self.view.bounds.size.width > 640 {
-            cell.line.font = cell.line.font.withSize(22)
-            cell.direction.font = cell.direction.font.withSize(14)
-            cell.time.font = cell.time.font.withSize(22)
-            cell.platform.font = cell.platform.font.withSize(14)
-        } else {
-            cell.line.font = cell.line.font.withSize(19)
-            cell.direction.font = cell.direction.font.withSize(12)
-            cell.time.font = cell.time.font.withSize(19)
-            cell.platform.font = cell.platform.font.withSize(12)
-        }
-        
-        cell.type.image = departure.type.glyph
-        cell.line.text = departure.line
-        cell.direction.text = departure.direction
-        cell.time.text = departure.time
-        
-        if departure.delay > 1 {
-            cell.time.textColor = UIColor(named: "Alert Color")!
-            cell.platform.textColor = UIColor(named: "Alert Color")!
-        } else {
-            cell.time.textColor = UIColor(named: "Tint Color")!
-            cell.platform.textColor = UIColor(named: "Tint Color")!
-        }
-        
-        if departure.platform.isEmpty {
-            if departure.delay > 1 {
-                cell.platform.text = "+\(departure.delay)"
-            } else {
-                cell.platform.text = ""
-            }
-        } else {
-            cell.platform.text = "Gleis " + departure.platform
+        if let station = self.station, let cell = tableView.dequeueReusableCell(withIdentifier: "Departure", for: indexPath) as? DepartureCell {
+            let departure = station.departures[indexPath.row]
             
-            if departure.delay > 1 {
-                cell.platform.text = cell.platform.text! + ", +\(departure.delay)"
+            if traitCollection.userInterfaceIdiom == .pad && self.view.bounds.size.width > 640 {
+                cell.line.font = cell.line.font.withSize(22)
+                cell.direction.font = cell.direction.font.withSize(14)
+                cell.time.font = cell.time.font.withSize(22)
+                cell.platform.font = cell.platform.font.withSize(14)
+            } else {
+                cell.line.font = cell.line.font.withSize(19)
+                cell.direction.font = cell.direction.font.withSize(12)
+                cell.time.font = cell.time.font.withSize(19)
+                cell.platform.font = cell.platform.font.withSize(12)
             }
+            
+            cell.type.image = departure.type.symbol
+            
+            cell.line.text = departure.line
+            
+            cell.direction.text = departure.direction
+            
+            let timeFormatter = DateFormatter()
+            timeFormatter.timeStyle = .short
+            cell.time.text = timeFormatter.string(from: departure.time)
+            
+            if departure.delay > 60 {
+                if !departure.platform.isEmpty {
+                    cell.platform.text = NSLocalizedString("PLATFORM", comment: "Platform") + " \(departure.platform ), +\(departure.delay/60)"
+                } else {
+                    cell.platform.text = "+\(departure.delay/60)"
+                }
+                
+                cell.time.textColor = UIColor(named: "Alert Color")!
+                cell.platform.textColor = UIColor(named: "Alert Color")!
+            } else {
+                cell.time.textColor = UIColor(named: "Tint Color")!
+                cell.platform.textColor = UIColor(named: "Tint Color")!
+                
+                if !departure.platform.isEmpty {
+                    cell.platform.text = NSLocalizedString("PLATFORM", comment: "Platform") + " \(departure.platform)"
+                } else {
+                    cell.platform.text = ""
+                }
+            }
+            
+            return cell
+        } else {
+            let cell =  UITableViewCell()
+            cell.backgroundColor = UIColor.clear
+            cell.contentView.backgroundColor = UIColor.clear
+            return cell
         }
-        
-        return cell
     }
     
     
