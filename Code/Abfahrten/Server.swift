@@ -27,7 +27,8 @@ struct Server {
     /// - Parameter searchTerm: A station name to find
     /// - Parameter completion: Do something with the result
     static func station(with name: String, completion: @escaping (Station?) -> Void) {
-        if let url = URL(string: "https://apps.yannikbloscheck.com/abfahrten/api/1.0/station-by-name/\(name)/") {
+        if let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed), let url = URL(string: "https://apps.yannikbloscheck.com/abfahrten/api/1.0/station-by-name/\(encodedName)/") {
+            debugPrint(url)
             station(with: url, completion: completion)
         } else {
             completion(nil)
