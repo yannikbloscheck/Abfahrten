@@ -2,7 +2,7 @@ import Foundation
 import CoreLocation
 
 
-/// Parses the departures from the website
+/// Gets the station from the API
 ///
 /// - Copyright: © Yannik Bloscheck - All rights reserved
 /// - Since: 2018-06-18
@@ -28,7 +28,6 @@ struct Server {
     /// - Parameter completion: Do something with the result
     static func station(with name: String, completion: @escaping (Station?) -> Void) {
         if let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed), let url = URL(string: "https://apps.yannikbloscheck.com/abfahrten/api/1.0/station-by-name/\(encodedName)/") {
-            debugPrint(url)
             station(with: url, completion: completion)
         } else {
             completion(nil)
