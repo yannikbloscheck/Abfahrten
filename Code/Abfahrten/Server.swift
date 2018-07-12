@@ -14,7 +14,7 @@ struct Server {
     /// - Parameter coordinate: A coordinate
     /// - Parameter completion: Do something with the result
     static func station(for coordinate: CLLocationCoordinate2D, completion: @escaping (Station?) -> Void) {
-        if let url = URL(string: "https://apps.yannikbloscheck.com/abfahrten/api/1.0/station-by-location/\(coordinate.latitude),\(coordinate.longitude)/") {
+        if let url = URL(string: "https://api.yannikbloscheck.com/abfahrten/1.0/departures/by-location/\(coordinate.latitude),\(coordinate.longitude)/") {
             station(with: url, completion: completion)
         } else {
             completion(nil)
@@ -27,7 +27,7 @@ struct Server {
     /// - Parameter searchTerm: A station name to find
     /// - Parameter completion: Do something with the result
     static func station(with name: String, completion: @escaping (Station?) -> Void) {
-        if let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed), let url = URL(string: "https://apps.yannikbloscheck.com/abfahrten/api/1.0/station-by-name/\(encodedName)/") {
+        if let encodedName = name.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed), let url = URL(string: "https://api.yannikbloscheck.com/abfahrten/1.0/departures/by-name/\(encodedName)/") {
             station(with: url, completion: completion)
         } else {
             completion(nil)
