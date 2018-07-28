@@ -363,5 +363,25 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
     /// - Parameter manager: The location manager
     /// - Parameter error: The error
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {}
+    
+    
+    /// Handle a authorization status
+    ///
+    /// - Parameter manager: The location manager
+    /// - Parameter status: The authorization status
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if CLLocationManager.locationServicesEnabled() && (status != .restricted && status != .denied) && CLLocationManager.significantLocationChangeMonitoringAvailable() {
+            locationManager = CLLocationManager()
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.distanceFilter = 20
+            locationManager.requestAlwaysAuthorization()
+            locationManager.startMonitoringSignificantLocationChanges()
+            
+            if let currentCoordinate = locationManager.location?.coordinate {
+                coordinate = currentCoordinate
+            }
+        }
+    }
 }
 
