@@ -244,11 +244,11 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
             timeFormatter.timeStyle = .short
             cell.time.text = timeFormatter.string(from: departure.time)
             
-            if departure.delay > 60 {
-                if !departure.platform.isEmpty {
-                    cell.platform.text = NSLocalizedString("PLATFORM", comment: "Platform") + " \(departure.platform ), +\(departure.delay/60)"
+            if let delay = departure.delay, delay > 60 {
+                if let platform = departure.platform, !platform.isEmpty {
+                    cell.platform.text = NSLocalizedString("PLATFORM", comment: "Platform") + " \(platform ), +\(delay/60)"
                 } else {
-                    cell.platform.text = "+\(departure.delay/60)"
+                    cell.platform.text = "+\(delay/60)"
                 }
                 
                 cell.time.textColor = UIColor(named: "Alert Color")!
@@ -257,8 +257,8 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
                 cell.time.textColor = UIColor(named: "Tint Color")!
                 cell.platform.textColor = UIColor(named: "Tint Color")!
                 
-                if !departure.platform.isEmpty {
-                    cell.platform.text = NSLocalizedString("PLATFORM", comment: "Platform") + " \(departure.platform)"
+                if let platform = departure.platform, !platform.isEmpty {
+                    cell.platform.text = NSLocalizedString("PLATFORM", comment: "Platform") + " \(platform)"
                 } else {
                     cell.platform.text = ""
                 }

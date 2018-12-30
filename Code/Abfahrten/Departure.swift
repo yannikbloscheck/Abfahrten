@@ -25,11 +25,11 @@ struct Departure: Codable {
     
     
     /// The delay with which the line will depart
-    let delay: Int
+    let delay: Int?
     
     
     /// The platform where the line will depart from
-    let platform: String
+    let platform: String?
     
     
     
@@ -46,8 +46,8 @@ struct Departure: Codable {
         self.type = type
         self.direction = direction
         self.time = time
-        self.delay = 0
-        self.platform = ""
+        self.delay = nil
+        self.platform = nil
     }
     
     
@@ -63,7 +63,7 @@ struct Departure: Codable {
         self.type = type
         self.direction = direction
         self.time = time
-        self.delay = 0
+        self.delay = nil
         self.platform = platform
     }
     
@@ -81,7 +81,7 @@ struct Departure: Codable {
         self.direction = direction
         self.time = time
         self.delay = delay
-        self.platform = ""
+        self.platform = nil
     }
     
     
