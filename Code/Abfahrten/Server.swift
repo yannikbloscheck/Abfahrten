@@ -14,7 +14,7 @@ struct Server {
     /// - Parameter coordinate: A coordinate
     /// - Parameter completion: Do something with the result
     static func station(for coordinate: CLLocationCoordinate2D, completion: @escaping (Station?) -> Void) {
-        if let url = URL(string: "https://api.yannikbloscheck.com/abfahrten/1.1/station/by-location/\(coordinate.latitude),\(coordinate.longitude)/") {
+        if let url = URL(string: "https://api.yannikbloscheck.com/abfahrten/2.0/station/by-location/\(coordinate.latitude),\(coordinate.longitude)/") {
             station(with: url, completion: completion)
         } else {
             completion(nil)
@@ -27,7 +27,7 @@ struct Server {
     /// - Parameter searchTerm: A station name to find
     /// - Parameter completion: Do something with the result
     static func station(with name: String, completion: @escaping (Station?) -> Void) {
-        if let encodedName = name.addingPercentEncoding(withAllowedCharacters: .alphanumerics), let url = URL(string: "https://api.yannikbloscheck.com/abfahrten/1.1/station/by-name/\(encodedName)/") {
+        if let encodedName = name.addingPercentEncoding(withAllowedCharacters: .alphanumerics), let url = URL(string: "https://api.yannikbloscheck.com/abfahrten/2.0/station/by-name/\(encodedName)/") {
             station(with: url, completion: completion)
         } else {
             completion(nil)
@@ -42,8 +42,8 @@ struct Server {
     static private func station(with url: URL, completion: @escaping (Station?) -> Void) {
         let urlRequest = URLRequest(url: url, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalCacheData, timeoutInterval: 60)
         URLSession.shared.dataTask(with: urlRequest) { (data, _, _) in
-            let jsonDecoder = JSONDecoder()
-            jsonDecoder.dateDecodingStrategy = .secondsSince1970
+			let jsonDecoder = JSONDecoder()
+            jsonDecoder.dateDecodingStrategy = .iso8601
             if let json = data, let station = try? jsonDecoder.decode(Station.self, from: json) {
                 completion(station)
             } else {

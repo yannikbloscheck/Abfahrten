@@ -20,8 +20,8 @@ struct Departure: Codable {
     let direction: String
     
     
-    /// The time when the line will depart
-    let time: Date
+    /// The date when the line will depart
+    let date: Date
     
     
     /// The delay with which the line will depart
@@ -40,12 +40,12 @@ struct Departure: Codable {
     /// - Parameter line: A line that will depart
     /// - Parameter type: A type of transportation that will depart
     /// - Parameter direction: A direction in which the line will depart
-    /// - Parameter time: A time when the line will depart
-    init(of line: String, with type: Type, to direction: String, at time: Date) {
+    /// - Parameter date: A date when the line will depart
+    init(of line: String, with type: Type, to direction: String, at date: Date) {
         self.line = line
         self.type = type
         self.direction = direction
-        self.time = time
+        self.date = date
         self.delay = nil
         self.platform = nil
     }
@@ -56,13 +56,13 @@ struct Departure: Codable {
     /// - Parameter line: A line that will depart
     /// - Parameter type: A type of transportation that will depart
     /// - Parameter direction: A direction in which the line will depart
-    /// - Parameter time: A time when the line will depart
+    /// - Parameter date: A date when the line will depart
     /// - Parameter platform: A platform where the line will depart from
-    init(of line: String, with type: Type, to direction: String, at time: Date, from platform: String) {
+    init(of line: String, with type: Type, to direction: String, at date: Date, from platform: String) {
         self.line = line
         self.type = type
         self.direction = direction
-        self.time = time
+        self.date = date
         self.delay = nil
         self.platform = platform
     }
@@ -73,13 +73,13 @@ struct Departure: Codable {
     /// - Parameter line: A line that will depart
     /// - Parameter type: A type of transportation that will depart
     /// - Parameter direction: A direction in which the line will depart
-    /// - Parameter time: A time when the line will depart
+    /// - Parameter date: A date when the line will depart
     /// - Parameter delay: A delay with which the line will depart
-    init(of line: String, with type: Type, to direction: String, at time: Date, with delay: Int) {
+    init(of line: String, with type: Type, to direction: String, at date: Date, with delay: Int) {
         self.line = line
         self.type = type
         self.direction = direction
-        self.time = time
+        self.date = date
         self.delay = delay
         self.platform = nil
     }
@@ -90,14 +90,14 @@ struct Departure: Codable {
     /// - Parameter line: A line that will depart
     /// - Parameter type: A type of transportation that will depart
     /// - Parameter direction: A direction in which the line will depart
-    /// - Parameter time: A time when the line will depart
+    /// - Parameter date: A date when the line will depart
     /// - Parameter delay: A delay with which the line will depart
     /// - Parameter platform: A platform where the line will depart from
-    init(of line: String, with type: Type, to direction: String, at time: Date, with delay: Int, from platform: String) {
+    init(of line: String, with type: Type, to direction: String, at date: Date, with delay: Int, from platform: String) {
         self.line = line
         self.type = type
         self.direction = direction
-        self.time = time
+        self.date = date
         self.delay = delay
         self.platform = platform
     }

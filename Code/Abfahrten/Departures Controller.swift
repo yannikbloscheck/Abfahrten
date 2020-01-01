@@ -242,7 +242,7 @@ class DeparturesController: UIViewController, UITableViewDataSource, UITableView
             
             let timeFormatter = DateFormatter()
             timeFormatter.timeStyle = .short
-            cell.time.text = timeFormatter.string(from: departure.time)
+            cell.time.text = timeFormatter.string(from: departure.date)
             
             if let delay = departure.delay, delay > 60 {
                 if let platform = departure.platform, !platform.isEmpty {

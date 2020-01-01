@@ -11,6 +11,9 @@ struct Station: Codable {
     /// The name of the station
     let name: String
     
+    /// The creation date of the data
+    let date: Date
+    
     /// The departures from the station
     let departures: [Departure]
     
@@ -21,9 +24,11 @@ struct Station: Codable {
     /// Initalize a departure
     ///
     /// - Parameter name: A name for the station
+	/// - Parameter date: A creation date of the data
     /// - Parameter departures: Departures from the station
-    init(name: String, departures: [Departure]) {
+    init(name: String, date: Date, departures: [Departure]) {
         self.name = name
+		self.date = date
         self.departures = departures
     }
 }
