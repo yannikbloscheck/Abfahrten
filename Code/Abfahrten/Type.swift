@@ -18,22 +18,9 @@ enum Type: String, Codable {
     /// Get a symbol for the type of transportation
     ///
     /// - Returns: Symbol for the type
-    var symbol: UIImage {
+    var symbol: String {
         get {
-            switch self {
-            case .countryTrain:
-                return #imageLiteral(resourceName: "Types/Country Train")
-            case .regionTrain:
-                return #imageLiteral(resourceName: "Types/Region Train")
-            case .cityTrain:
-                return #imageLiteral(resourceName: "Types/City Train")
-            case .underground:
-                return #imageLiteral(resourceName: "Types/Underground")
-            case .tram:
-                return #imageLiteral(resourceName: "Types/Tram")
-            case .bus:
-                return #imageLiteral(resourceName: "Types/Bus")
-            }
+			return "Types/\(rawValue)"
         }
     }
 }

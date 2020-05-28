@@ -5,7 +5,7 @@ import Foundation
 ///
 /// - Copyright: © Yannik Bloscheck - All rights reserved
 /// - Since: 2017-10-15
-struct Departure: Codable {
+struct Departure: Hashable, Codable {
     // MARK: - Properties
     
     /// The line that will depart

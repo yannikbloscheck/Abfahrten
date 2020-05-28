@@ -1,3 +1,6 @@
-
-/* Platform */
 "PLATFORM" = "Gleis";
+"NAME" = "Name";
+"SEARCHING" = "Suchen...";
+"SEARCH" = "Suchen";
+"NO_STATION" = "Keine Station";
+"NO_DEPARTURES" = "Keine Abfahrten";

@@ -6,14 +6,7 @@ import UIKit
 ///
 /// - Copyright: © Yannik Bloscheck - All rights reserved
 /// - Since: 2017-10-15
-@UIApplicationMain class Main: UIResponder, UIApplicationDelegate {
-    // MARK: - Properties
-    
-    /// The window of the application
-    var window: UIWindow?
-    
-    
-    
+@UIApplicationMain class ApplicationDelegate: UIResponder, UIApplicationDelegate {
     // MARK: - Application Delegate
     
     /// Do things before the app is ready to run
@@ -23,6 +16,15 @@ import UIKit
     /// - Returns: `true` if the app should run or `false` if not
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         return true
+    }
+	
+	
+	/// Select a configuration to create the new scene with
+	/// - Parameter application: The application
+	/// - Parameter connectingSceneSession: The scene session
+	/// - Parameter options: The scene connection options
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
     
     

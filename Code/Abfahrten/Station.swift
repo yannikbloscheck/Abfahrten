@@ -5,7 +5,7 @@ import Foundation
 ///
 /// - Copyright: © Yannik Bloscheck - All rights reserved
 /// - Since: 2018-06-18
-struct Station: Codable {
+struct Station: Equatable, Codable {
     // MARK: - Properties
     
     /// The name of the station

@@ -1,3 +1,6 @@
-
-/* Platform */
 "PLATFORM" = "Platform";
+"NAME" = "Name";
+"SEARCHING" = "Searching...";
+"SEARCH" = "Search";
+"NO_STATION" = "No station";
+"NO_DEPARTURES" = "No departures";
