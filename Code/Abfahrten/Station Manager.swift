@@ -32,7 +32,8 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 		
 		// Setup the location manager
 		if CLLocationManager.locationServicesEnabled() && (CLLocationManager.authorizationStatus() != .restricted && CLLocationManager.authorizationStatus() != .denied) && CLLocationManager.significantLocationChangeMonitoringAvailable() {
-
+			
+			locationManager = CLLocationManager()
 			locationManager.delegate = self
 			locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
 			locationManager.distanceFilter = 20
@@ -57,9 +58,11 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         if let url = URL(string: "https://api.yannikbloscheck.com/abfahrten/2.0/station/by-location/\(coordinate.latitude),\(coordinate.longitude)/") {
 			refreshStation(with: url, completion: completion)
         } else {
-			self.hasNewStation = false
-            self.station = nil
-			completion()
+			DispatchQueue.main.async {
+				self.hasNewStation = false
+				self.station = nil
+				completion()
+			}
         }
     }
     
@@ -74,9 +77,11 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 		} else if let encodedName = name.trimmingCharacters(in: .whitespacesAndNewlines).addingPercentEncoding(withAllowedCharacters: .alphanumerics), let url = URL(string: "https://api.yannikbloscheck.com/abfahrten/2.0/station/by-name/\(encodedName)/") {
             refreshStation(with: url, completion: completion)
         } else {
-			self.hasNewStation = false
-            self.station = nil
-			completion()
+			DispatchQueue.main.async {
+				self.hasNewStation = false
+				self.station = nil
+				completion()
+			}
         }
     }
     

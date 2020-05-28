@@ -1,6 +1,6 @@
 "PLATFORM" = "Gleis";
 "NAME" = "Name";
-"SEARCHING" = "Suchen...";
+"SEARCHING" = "Nahegelegene Station suchen...";
 "SEARCH" = "Suchen";
 "NO_STATION" = "Keine Station";
 "NO_DEPARTURES" = "Keine Abfahrten";

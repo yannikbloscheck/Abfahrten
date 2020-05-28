@@ -66,7 +66,9 @@ struct DeparturesView: View {
 									.frame(minWidth: 200, maxWidth: .infinity, minHeight: 44, idealHeight: 48, maxHeight: 88, alignment: .top)
 							}
 						}
-						.padding([.top], geometry.safeAreaInsets.top + 57)
+						.padding([.top], geometry.safeAreaInsets.top)
+						.padding([.top], 44)
+						.padding([.top])
 					}
 			   } else {
 					VStack(alignment: .center) {

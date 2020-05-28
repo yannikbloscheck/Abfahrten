@@ -19,6 +19,7 @@
 		27379D902480179A001B01F7 /* Application Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27379D852480179A001B01F7 /* Application Delegate.swift */; };
 		27379D9824803E9C001B01F7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27379D9724803E9C001B01F7 /* CoreLocation.framework */; };
 		27379D9E2480474F001B01F7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27379DA02480474F001B01F7 /* Localizable.strings */; };
+		27641364248074A600C0D2C0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27641366248074A600C0D2C0 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,8 @@
 		27379D9724803E9C001B01F7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		27379D9F2480474F001B01F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		27379DA124804750001B01F7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		27641365248074A600C0D2C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		27641367248074A900C0D2C0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +87,7 @@
 				27379D6E24801723001B01F7 /* Assets.xcassets */,
 				27379D95248017BE001B01F7 /* Launch.storyboard */,
 				27379D7624801723001B01F7 /* Info.plist */,
+				27641366248074A600C0D2C0 /* InfoPlist.strings */,
 				27379D7024801723001B01F7 /* Preview Content */,
 			);
 			path = Abfahrten;
@@ -165,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27379D7224801723001B01F7 /* Preview Assets.xcassets in Resources */,
+				27641364248074A600C0D2C0 /* InfoPlist.strings in Resources */,
 				27379D9E2480474F001B01F7 /* Localizable.strings in Resources */,
 				27379D6F24801723001B01F7 /* Assets.xcassets in Resources */,
 			);
@@ -198,6 +203,15 @@
 				27379DA124804750001B01F7 /* de */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		27641366248074A600C0D2C0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27641365248074A600C0D2C0 /* en */,
+				27641367248074A900C0D2C0 /* de */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -322,7 +336,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 420;
+				CURRENT_PROJECT_VERSION = 428;
 				DEVELOPMENT_ASSET_PATHS = "\"Abfahrten/Preview Content\"";
 				DEVELOPMENT_TEAM = 8BYRL5LF6J;
 				ENABLE_PREVIEWS = YES;
@@ -344,7 +358,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 420;
+				CURRENT_PROJECT_VERSION = 428;
 				DEVELOPMENT_ASSET_PATHS = "\"Abfahrten/Preview Content\"";
 				DEVELOPMENT_TEAM = 8BYRL5LF6J;
 				ENABLE_PREVIEWS = YES;
