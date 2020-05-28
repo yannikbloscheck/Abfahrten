@@ -1,6 +1,6 @@
 "PLATFORM" = "Platform";
 "NAME" = "Name";
-"SEARCHING" = "Searching nearby station...";
+"SEARCHING" = "Searching nearest station...";
 "SEARCH" = "Search";
 "NO_STATION" = "No station";
 "NO_DEPARTURES" = "No departures";
