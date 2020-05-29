@@ -84,7 +84,7 @@ struct DeparturesView: View {
 						HStack(alignment: .center, spacing: 0) {
 							Image(systemName: "magnifyingglass")
 								.font(.caption)
-								.foregroundColor(Color.primary.opacity(0.3))
+								.foregroundColor(Color.primary.opacity(0.25))
 								.padding(.leading, 10)
 							TextField((self.stationManager.hasNewStation ? NSLocalizedString("SEARCHING", comment: "Searching...") : (self.isEditing ? NSLocalizedString("NAME", comment: "Name") : self.stationManager.station?.name ?? NSLocalizedString("SEARCH", comment: "Search"))), text: self.$searchTerms, onEditingChanged: { isEditing in
 								self.isEditing = isEditing
@@ -121,7 +121,7 @@ struct DeparturesView: View {
 					}
 					.background(Color("Light Background Color"))
 					.clipped()
-					.shadow(color: Color.black.opacity(self.colorScheme == .dark ? 0.3 : 0.2), radius: (self.colorScheme == .dark ? 4 : 2), x: 0, y: (self.colorScheme == .dark ? 2 : 1))
+					.shadow(color: Color.black.opacity(self.colorScheme == .dark ? 0.9 : 0.2), radius: (self.colorScheme == .dark ? 4 : 2), x: 0, y: (self.colorScheme == .dark ? 2 : 1))
 					Spacer()
 				}
 			}

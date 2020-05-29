@@ -84,7 +84,7 @@ struct DepartureView: View {
 			.padding(.trailing, 8)
 		}
 		.background(Color("Light Background Color"))
-		.shadow(color: Color.black.opacity(colorScheme == .dark ? 0.2 : 0.1), radius: (colorScheme == .dark ? 4 : 2), x: 0, y: (colorScheme == .dark ? 2 : 1))
+		.shadow(color: Color.black.opacity(colorScheme == .dark ? 0.8 : 0.1), radius: (colorScheme == .dark ? 4 : 2), x: 0, y: (colorScheme == .dark ? 2 : 1))
     }
 }
 
