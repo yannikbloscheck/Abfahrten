@@ -22,12 +22,51 @@ struct DeparturesView: View {
 	@State private var isEditing: Bool = false
 	
 	
-	/// Is the waiting spinner currently spinning?
-	@State private var isSpinning: Bool = false
-	
-	
 	/// The search terms
 	@State private var searchTerms = ""
+	
+	
+	/// The view for the top bar
+	var bar: some View {
+		VStack {
+			HStack(alignment: .center, spacing: 0) {
+				Image(systemName: "magnifyingglass")
+					.font(.caption)
+					.foregroundColor(Color.primary.opacity(0.25))
+					.padding(.leading, 10)
+				TextField((self.stationManager.hasNewStation ? NSLocalizedString("SEARCHING", comment: "Searching...") : (self.isEditing ? NSLocalizedString("NAME", comment: "Name") : self.stationManager.station?.name ?? NSLocalizedString("SEARCH", comment: "Search"))), text: self.$searchTerms, onEditingChanged: { isEditing in
+					self.isEditing = isEditing
+				}, onCommit: {
+					self.isEditing = false
+					self.stationManager.hasNewStation = true
+					self.stationManager.refreshStation(with: self.searchTerms){
+						if let station = self.stationManager.station {
+							self.searchTerms = station.name
+						}
+					}
+				})
+					.padding(.top, 6)
+					.padding(.bottom, 4)
+					.padding([.leading,.trailing], 6)
+				if self.isEditing {
+					Button(action: {
+						UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+						self.isEditing = false
+						self.stationManager.hasNewStation = true
+						self.searchTerms = ""
+						self.stationManager.refreshStation(with: self.searchTerms){}
+					}) {
+						Image(systemName: "xmark.circle.fill").font(.body)
+					}
+					.padding([.trailing], 8)
+					.foregroundColor(Color.primary)
+				}
+			}
+			.background(Color("Dark Background Color"))
+			.cornerRadius(6)
+			.padding(.all, 8)
+		}
+	}
 	
 	
 	/// The actual view
@@ -39,15 +78,8 @@ struct DeparturesView: View {
 				} else if self.stationManager.hasNewStation {
 					VStack(alignment: .center) {
 						   Spacer()
-						   Image(systemName: "slowmo")
-							.font(.title)
-							.opacity(0.2)
-							.rotationEffect(.degrees(self.isSpinning ? 360 : 0))
-							.animation(Animation.linear(duration: 1.6).repeatForever(autoreverses: false))
-							.onAppear {
-								self.isSpinning.toggle()
-							}
-						    Spacer()
+						   ProgressView().progressViewStyle(CircularProgressViewStyle())
+							Spacer()
 					}
 					.padding([.top], geometry.safeAreaInsets.top)
 				} else if self.stationManager.station == nil {
@@ -60,7 +92,7 @@ struct DeparturesView: View {
 					.padding([.top], geometry.safeAreaInsets.top)
 				} else if !self.stationManager.station!.departures.isEmpty {
 					ScrollView(.vertical, showsIndicators: false) {
-						VStack(alignment: .center) {
+						LazyVStack(alignment: .center) {
 							ForEach(self.stationManager.station!.departures, id: \.self) { departure in
 								DepartureView(departure: departure)
 									.frame(minWidth: 200, maxWidth: .infinity, minHeight: 44, idealHeight: 48, maxHeight: 88, alignment: .top)
@@ -79,46 +111,10 @@ struct DeparturesView: View {
 					}
 					.padding([.top], geometry.safeAreaInsets.top)
 			    }
+				
 				VStack {
-					VStack {
-						HStack(alignment: .center, spacing: 0) {
-							Image(systemName: "magnifyingglass")
-								.font(.caption)
-								.foregroundColor(Color.primary.opacity(0.25))
-								.padding(.leading, 10)
-							TextField((self.stationManager.hasNewStation ? NSLocalizedString("SEARCHING", comment: "Searching...") : (self.isEditing ? NSLocalizedString("NAME", comment: "Name") : self.stationManager.station?.name ?? NSLocalizedString("SEARCH", comment: "Search"))), text: self.$searchTerms, onEditingChanged: { isEditing in
-								self.isEditing = isEditing
-							}, onCommit: {
-								self.isEditing = false
-								self.stationManager.hasNewStation = true
-								self.stationManager.refreshStation(with: self.searchTerms){
-									if let station = self.stationManager.station {
-										self.searchTerms = station.name
-									}
-								}
-							})
-								.padding(.top, 6)
-								.padding(.bottom, 4)
-								.padding([.leading,.trailing], 6)
-							if self.isEditing {
-								Button(action: {
-									UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-									self.isEditing = false
-									self.stationManager.hasNewStation = true
-									self.searchTerms = ""
-									self.stationManager.refreshStation(with: self.searchTerms){}
-								}) {
-									Image(systemName: "xmark.circle.fill").font(.body)
-								}
-								.padding([.trailing], 8)
-								.foregroundColor(Color.primary)
-							}
-						}
-						.background(Color("Dark Background Color"))
-						.cornerRadius(6)
-						.padding([.top], geometry.safeAreaInsets.top)
-						.padding(.all, 8)
-					}
+					bar
+					.padding([.top], geometry.safeAreaInsets.top)
 					.background(Color("Light Background Color"))
 					.clipped()
 					.shadow(color: Color.black.opacity(self.colorScheme == .dark ? 0.9 : 0.2), radius: (self.colorScheme == .dark ? 4 : 2), x: 0, y: (self.colorScheme == .dark ? 2 : 1))
@@ -128,9 +124,10 @@ struct DeparturesView: View {
 			.edgesIgnoringSafeArea(.top)
 			.accentColor(Color("Tint Color"))
 			.background(Color("Dark Background Color"))
-		}.onReceive(timer) { (_) in
-			if !self.isEditing, !self.stationManager.hasNewStation {
-				self.stationManager.refreshStation(with: self.searchTerms){
+			.onReceive(timer) { (_) in
+				if !self.isEditing, !self.stationManager.hasNewStation {
+					self.stationManager.refreshStation(with: self.searchTerms){
+					}
 				}
 			}
 		}

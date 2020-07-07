@@ -15,8 +15,7 @@
 		27379D8A2480179A001B01F7 /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27379D7F24801798001B01F7 /* Type.swift */; };
 		27379D8B2480179A001B01F7 /* Departure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27379D8024801799001B01F7 /* Departure.swift */; };
 		27379D8D2480179A001B01F7 /* Departures View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27379D8224801799001B01F7 /* Departures View.swift */; };
-		27379D8F2480179A001B01F7 /* Scene Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27379D842480179A001B01F7 /* Scene Delegate.swift */; };
-		27379D902480179A001B01F7 /* Application Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27379D852480179A001B01F7 /* Application Delegate.swift */; };
+		27379D902480179A001B01F7 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27379D852480179A001B01F7 /* Main.swift */; };
 		27379D9824803E9C001B01F7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27379D9724803E9C001B01F7 /* CoreLocation.framework */; };
 		27379D9E2480474F001B01F7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27379DA02480474F001B01F7 /* Localizable.strings */; };
 		27641364248074A600C0D2C0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27641366248074A600C0D2C0 /* InfoPlist.strings */; };
@@ -33,8 +32,7 @@
 		27379D7F24801798001B01F7 /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		27379D8024801799001B01F7 /* Departure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Departure.swift; sourceTree = "<group>"; };
 		27379D8224801799001B01F7 /* Departures View.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Departures View.swift"; sourceTree = "<group>"; };
-		27379D842480179A001B01F7 /* Scene Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Scene Delegate.swift"; sourceTree = "<group>"; };
-		27379D852480179A001B01F7 /* Application Delegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Application Delegate.swift"; sourceTree = "<group>"; };
+		27379D852480179A001B01F7 /* Main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		27379D95248017BE001B01F7 /* Launch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Launch.storyboard; sourceTree = "<group>"; };
 		27379D9724803E9C001B01F7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		27379D9F2480474F001B01F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -75,8 +73,7 @@
 		27379D6724801721001B01F7 /* Abfahrten */ = {
 			isa = PBXGroup;
 			children = (
-				27379D852480179A001B01F7 /* Application Delegate.swift */,
-				27379D842480179A001B01F7 /* Scene Delegate.swift */,
+				27379D852480179A001B01F7 /* Main.swift */,
 				27379D8224801799001B01F7 /* Departures View.swift */,
 				27379D7D24801798001B01F7 /* Departure View.swift */,
 				27379D7C24801798001B01F7 /* Station Manager.swift */,
@@ -136,7 +133,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Yannik Bloscheck";
 				TargetAttributes = {
 					27379D6424801721001B01F7 = {
@@ -184,9 +181,8 @@
 			files = (
 				27379D872480179A001B01F7 /* Station Manager.swift in Sources */,
 				27379D8D2480179A001B01F7 /* Departures View.swift in Sources */,
-				27379D902480179A001B01F7 /* Application Delegate.swift in Sources */,
+				27379D902480179A001B01F7 /* Main.swift in Sources */,
 				27379D8A2480179A001B01F7 /* Type.swift in Sources */,
-				27379D8F2480179A001B01F7 /* Scene Delegate.swift in Sources */,
 				27379D892480179A001B01F7 /* Station.swift in Sources */,
 				27379D8B2480179A001B01F7 /* Departure.swift in Sources */,
 				27379D882480179A001B01F7 /* Departure View.swift in Sources */,
@@ -221,6 +217,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -243,6 +240,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -267,7 +265,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -281,6 +279,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -303,6 +302,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -321,7 +321,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -336,7 +336,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 432;
+				CURRENT_PROJECT_VERSION = 434;
 				DEVELOPMENT_ASSET_PATHS = "\"Abfahrten/Preview Content\"";
 				DEVELOPMENT_TEAM = 8BYRL5LF6J;
 				ENABLE_PREVIEWS = YES;
@@ -345,7 +345,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yannikbloscheck.Abfahrten;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -358,7 +358,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 432;
+				CURRENT_PROJECT_VERSION = 434;
 				DEVELOPMENT_ASSET_PATHS = "\"Abfahrten/Preview Content\"";
 				DEVELOPMENT_TEAM = 8BYRL5LF6J;
 				ENABLE_PREVIEWS = YES;
@@ -367,7 +367,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yannikbloscheck.Abfahrten;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
