@@ -31,7 +31,7 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 		super.init()
 		
 		// Setup the location manager
-		if CLLocationManager.locationServicesEnabled(), CLLocationManager.significantLocationChangeMonitoringAvailable(), locationManager.authorizationStatus() != .restricted, locationManager.authorizationStatus() != .denied {
+		if CLLocationManager.locationServicesEnabled(), CLLocationManager.significantLocationChangeMonitoringAvailable() {
 			locationManager.delegate = self
 			locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
 			locationManager.distanceFilter = 20
