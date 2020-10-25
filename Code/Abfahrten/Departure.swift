@@ -2,7 +2,6 @@ import Foundation
 
 
 /// A departure
-///
 /// - Copyright: © Yannik Bloscheck - All rights reserved
 /// - Since: 2017-10-15
 struct Departure: Hashable, Codable {
@@ -12,31 +11,36 @@ struct Departure: Hashable, Codable {
     let line: String
     
     
+	
     /// The type of transportation that will depart
     let type: Type
     
     
+	
     /// The direction in which the line will depart
     let direction: String
     
+	
     
     /// The date when the line will depart
     let date: Date
     
+	
     
     /// The delay with which the line will depart
     let delay: Int?
     
+	
     
     /// The platform where the line will depart from
     let platform: String?
     
     
+	
     
     // MARK: - Initialization
     
     /// Initalize a departure
-    ///
     /// - Parameter line: A line that will depart
     /// - Parameter type: A type of transportation that will depart
     /// - Parameter direction: A direction in which the line will depart
@@ -50,9 +54,9 @@ struct Departure: Hashable, Codable {
         self.platform = nil
     }
     
+	
     
     /// Initalize a departure
-    ///
     /// - Parameter line: A line that will depart
     /// - Parameter type: A type of transportation that will depart
     /// - Parameter direction: A direction in which the line will depart
@@ -68,8 +72,8 @@ struct Departure: Hashable, Codable {
     }
     
     
+	
     /// Initalize a departure
-    ///
     /// - Parameter line: A line that will depart
     /// - Parameter type: A type of transportation that will depart
     /// - Parameter direction: A direction in which the line will depart
@@ -85,8 +89,8 @@ struct Departure: Hashable, Codable {
     }
     
     
+	
     /// Initalize a departure
-    ///
     /// - Parameter line: A line that will depart
     /// - Parameter type: A type of transportation that will depart
     /// - Parameter direction: A direction in which the line will depart

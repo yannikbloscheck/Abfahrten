@@ -1,9 +1,7 @@
 import Foundation
-import UIKit
 
 
 /// Different types of transportation
-///
 /// - Copyright: © Yannik Bloscheck - All rights reserved
 /// - Since: 2017-10-15
 enum Type: String, Codable {
@@ -15,8 +13,8 @@ enum Type: String, Codable {
     case bus = "Bus"
     
     
+	
     /// Get a symbol for the type of transportation
-    ///
     /// - Returns: Symbol for the type
     var symbol: String {
         get {

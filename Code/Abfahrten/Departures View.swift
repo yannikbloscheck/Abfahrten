@@ -3,27 +3,34 @@ import SwiftUI
 
 
 /// Main view for all departures
-///
 /// - Copyright: © Yannik Bloscheck - All rights reserved
 /// - Since: 2020-05-28
 struct DeparturesView: View {
+	// MARK: Properties
+	
 	/// The color scheme
 	@Environment(\.colorScheme) var colorScheme
+	
 	
 	
 	/// A timer for refreshing the departures every minute
 	var timer = Timer.publish(every: 60, on: .main, in: .default).autoconnect()
 	
+	
+	
 	/// The station manager
 	@ObservedObject var stationManager: StationManager
+	
 	
 	
 	/// Are the search terms currently getting edited?
 	@State private var isEditing: Bool = false
 	
 	
+	
 	/// The search terms
 	@State private var searchTerms = ""
+	
 	
 	
 	/// The view for the top bar
@@ -31,9 +38,10 @@ struct DeparturesView: View {
 		VStack {
 			HStack(alignment: .center, spacing: 0) {
 				Image(systemName: "magnifyingglass")
-					.font(.caption)
-					.foregroundColor(Color.primary.opacity(0.25))
-					.padding(.leading, 10)
+				.font(.caption)
+				.foregroundColor(Color.primary.opacity(0.25))
+				.padding(.leading, 10)
+				
 				TextField((self.stationManager.hasNewStation ? NSLocalizedString("SEARCHING", comment: "Searching...") : (self.isEditing ? NSLocalizedString("NAME", comment: "Name") : self.stationManager.station?.name ?? NSLocalizedString("SEARCH", comment: "Search"))), text: self.$searchTerms, onEditingChanged: { isEditing in
 					self.isEditing = isEditing
 				}, onCommit: {
@@ -45,9 +53,10 @@ struct DeparturesView: View {
 						}
 					}
 				})
-					.padding(.top, 6)
-					.padding(.bottom, 4)
-					.padding([.leading,.trailing], 6)
+				.padding(.top, 6)
+				.padding(.bottom, 4)
+				.padding([.leading,.trailing], 6)
+				
 				if self.isEditing {
 					Button(action: {
 						UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -69,6 +78,7 @@ struct DeparturesView: View {
 	}
 	
 	
+	
 	/// The actual view
 	var body: some View {
 		GeometryReader { geometry in
@@ -77,17 +87,21 @@ struct DeparturesView: View {
 					Spacer()
 				} else if self.stationManager.hasNewStation {
 					VStack(alignment: .center) {
-						   Spacer()
-						   ProgressView().progressViewStyle(CircularProgressViewStyle())
-							Spacer()
+						Spacer()
+						
+						ProgressView().progressViewStyle(CircularProgressViewStyle())
+						
+						Spacer()
 					}
 					.padding([.top], geometry.safeAreaInsets.top)
 				} else if self.stationManager.station == nil {
 					VStack(alignment: .center) {
-						   Spacer()
-						   Text("NO_STATION")
-							   .opacity(0.2)
-						   Spacer()
+						Spacer()
+						
+						Text("NO_STATION")
+						.opacity(0.2)
+						
+						Spacer()
 					}
 					.padding([.top], geometry.safeAreaInsets.top)
 				} else if !self.stationManager.station!.departures.isEmpty {
@@ -95,7 +109,7 @@ struct DeparturesView: View {
 						LazyVStack(alignment: .center) {
 							ForEach(self.stationManager.station!.departures, id: \.self) { departure in
 								DepartureView(departure: departure)
-									.frame(minWidth: 200, maxWidth: .infinity, minHeight: 44, idealHeight: 48, maxHeight: 88, alignment: .top)
+								.frame(minWidth: 200, maxWidth: .infinity, minHeight: 44, idealHeight: 48, maxHeight: 88, alignment: .top)
 							}
 						}
 						.padding([.top], geometry.safeAreaInsets.top)
@@ -105,8 +119,10 @@ struct DeparturesView: View {
 			   } else {
 					VStack(alignment: .center) {
 						   Spacer()
+						
 						   Text("NO_DEPARTURES")
 							   .opacity(0.2)
+						
 						   Spacer()
 					}
 					.padding([.top], geometry.safeAreaInsets.top)
@@ -118,12 +134,14 @@ struct DeparturesView: View {
 					.background(Color("Light Background Color"))
 					.clipped()
 					.shadow(color: Color.black.opacity(self.colorScheme == .dark ? 0.9 : 0.2), radius: (self.colorScheme == .dark ? 4 : 2), x: 0, y: (self.colorScheme == .dark ? 2 : 1))
+					
 					Spacer()
 				}
 			}
 			.edgesIgnoringSafeArea(.top)
 			.accentColor(Color("Tint Color"))
 			.background(Color("Dark Background Color"))
+			.edgesIgnoringSafeArea(.bottom)
 			.onReceive(timer) { (_) in
 				if !self.isEditing, !self.stationManager.hasNewStation {
 					self.stationManager.refreshStation(with: self.searchTerms){
@@ -136,10 +154,13 @@ struct DeparturesView: View {
 
 
 
+
 // MARK: -
 
 /// Provides helpful previews
 struct DeparturesView_Previews: PreviewProvider {
+	// MARK: Properties
+	
 	/// Example station manager for previews
 	static private var stationManager: StationManager {
 		get {
@@ -151,13 +172,15 @@ struct DeparturesView_Previews: PreviewProvider {
 	}
 	
 	
+	
 	/// Helpful previews
 	static var previews: some View {
 		Group{
 			DeparturesView(stationManager: stationManager)
-				.environment(\.colorScheme, .light)
+			.environment(\.colorScheme, .light)
+			
 			DeparturesView(stationManager: stationManager)
-				.environment(\.colorScheme, .dark)
+			.environment(\.colorScheme, .dark)
 		}
     }
 }

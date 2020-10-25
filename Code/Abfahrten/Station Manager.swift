@@ -3,7 +3,6 @@ import CoreLocation
 
 
 /// Gets the station from the API
-///
 /// - Copyright: © Yannik Bloscheck - All rights reserved
 /// - Since: 2018-06-18
 class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
@@ -12,13 +11,16 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	/// The location manager
 	var locationManager: CLLocationManager = CLLocationManager()
     
+	
     
     /// The coordinate from which to find the nearest station
     var coordinate: CLLocationCoordinate2D?
 	
 	
+	
 	/// Did the station change?
 	@Published var hasNewStation: Bool = true
+	
 	
 	
 	/// The current station
@@ -26,7 +28,10 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	
 	
 	
+	
 	// MARK: - Initialization
+	
+	/// Initalize a station manager
 	override init() {
 		super.init()
 		
@@ -46,10 +51,10 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	
 	
 	
+	
 	// MARK: - Main
     
     /// Find the station nearest to the coordinate
-    ///
     /// - Parameter coordinate: A coordinate
     /// - Parameter completion: Do something with the result
     func refreshStation(for coordinate: CLLocationCoordinate2D, completion: @escaping () -> Void) {
@@ -64,9 +69,9 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
+	
     
     /// Find the station with the given name
-    ///
     /// - Parameter name: A station name to find
     /// - Parameter completion: Do something with the result
     func refreshStation(with name: String, completion: @escaping () -> Void) {
@@ -83,9 +88,9 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
+	
     
     /// Find the station using the given url
-    ///
     /// - Parameter url: An url to an API endpoint
     /// - Parameter completion: Do something with the result
     private func refreshStation(with url: URL, completion: @escaping () -> Void) {
@@ -111,10 +116,10 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	
 	
 	
+	
 	// MARK: - Location Manager Delegate
 	
 	/// Handle new location data
-	///
 	/// - Parameter manager: The location manager
 	/// - Parameter locations: The updated locations
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -125,8 +130,8 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	}
 	
 	
+	
 	/// Handle an error while receiving locations
-	///
 	/// - Parameter manager: The location manager
 	/// - Parameter error: The error
 	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -134,8 +139,8 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	}
 	
 	
+	
 	/// Handle a authorization status
-	///
 	/// - Parameter manager: The location manager
 	/// - Parameter status: The authorization status
 	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

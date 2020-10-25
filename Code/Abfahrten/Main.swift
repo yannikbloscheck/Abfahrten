@@ -1,8 +1,8 @@
+import Foundation
 import SwiftUI
 
 
 /// Main for the application
-///
 /// - Copyright: © Yannik Bloscheck - All rights reserved
 /// - Since: 2020-06-25
 @main
@@ -11,6 +11,7 @@ struct Main: App {
 	
 	/// The station manager
 	@StateObject var stationManager = StationManager()
+	
 	
 	
 	/// The actual scene
