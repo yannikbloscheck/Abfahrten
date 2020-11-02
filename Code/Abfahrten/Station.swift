@@ -5,7 +5,7 @@ import Foundation
 /// - Copyright: © Yannik Bloscheck - All rights reserved
 /// - Since: 2018-06-18
 struct Station: Equatable, Codable {
-    // MARK: - Properties
+    // MARK: Properties
     
     /// The name of the station
     let name: String
@@ -23,7 +23,7 @@ struct Station: Equatable, Codable {
     
 	
     
-    // MARK: - Initialization
+    // MARK: Initialization
     
     /// Initalize a departure
     /// - Parameter name: A name for the station

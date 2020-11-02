@@ -158,7 +158,7 @@ struct DeparturesView: View {
 // MARK: -
 
 /// Provides helpful previews
-struct DeparturesView_Previews: PreviewProvider {
+struct DeparturesPreviews: PreviewProvider {
 	// MARK: Properties
 	
 	/// Example station manager for previews

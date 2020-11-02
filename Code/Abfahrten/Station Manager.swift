@@ -6,7 +6,7 @@ import CoreLocation
 /// - Copyright: © Yannik Bloscheck - All rights reserved
 /// - Since: 2018-06-18
 class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-	// MARK: - Properties
+	// MARK: Properties
 	
 	/// The location manager
 	var locationManager: CLLocationManager = CLLocationManager()
@@ -29,7 +29,7 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	
 	
 	
-	// MARK: - Initialization
+	// MARK: Initialization
 	
 	/// Initalize a station manager
 	override init() {
@@ -52,7 +52,7 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	
 	
 	
-	// MARK: - Main
+	// MARK: Methods
     
     /// Find the station nearest to the coordinate
     /// - Parameter coordinate: A coordinate
@@ -117,7 +117,7 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	
 	
 	
-	// MARK: - Location Manager Delegate
+	// MARK: Location Manager Delegate
 	
 	/// Handle new location data
 	/// - Parameter manager: The location manager

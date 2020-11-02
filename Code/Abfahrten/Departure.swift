@@ -5,7 +5,7 @@ import Foundation
 /// - Copyright: © Yannik Bloscheck - All rights reserved
 /// - Since: 2017-10-15
 struct Departure: Hashable, Codable {
-    // MARK: - Properties
+    // MARK: Properties
     
     /// The line that will depart
     let line: String
@@ -38,7 +38,7 @@ struct Departure: Hashable, Codable {
     
 	
     
-    // MARK: - Initialization
+    // MARK: Initialization
     
     /// Initalize a departure
     /// - Parameter line: A line that will depart

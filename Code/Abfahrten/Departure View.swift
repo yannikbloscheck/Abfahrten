@@ -100,7 +100,7 @@ struct DepartureView: View {
 // MARK: -
 
 /// Provides helpful previews
-struct DepartureViewPreviews: PreviewProvider {
+struct DeparturePreviews: PreviewProvider {
 	// MARK: Properties
 	
 	/// Helpful previews
