@@ -37,8 +37,11 @@
 		<string>location</string>
 		<string>processing</string>
 	</array>
-	<key>UILaunchStoryboardName</key>
-	<string>Launch</string>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>Theme/Background Color</string>
+	</dict>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

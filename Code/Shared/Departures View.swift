@@ -43,30 +43,48 @@ struct DeparturesView: View {
 				.padding(.leading, 10)
 				
 				TextField((self.stationManager.hasNewStation ? NSLocalizedString("SEARCHING", comment: "Searching...") : (self.isEditing ? NSLocalizedString("NAME", comment: "Name") : self.stationManager.station?.name ?? NSLocalizedString("SEARCH", comment: "Search"))), text: self.$searchTerms, onEditingChanged: { isEditing in
-					self.isEditing = isEditing
+					if isEditing {
+						self.isEditing = isEditing
+					}
 				}, onCommit: {
-					self.isEditing = false
 					self.stationManager.hasNewStation = true
-					self.stationManager.refreshStation(with: self.searchTerms){
-						if let station = self.stationManager.station {
+					self.stationManager.refreshStation(with: self.searchTerms) {
+						if !self.searchTerms.isEmpty , let station = self.stationManager.station {
 							self.searchTerms = station.name
+						} else {
+							self.searchTerms = ""
 						}
+						
+						self.isEditing = false
+						
+						#if os(macOS)
+						NSApplication.shared.keyWindow?.makeFirstResponder(nil)
+						#else
+						UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+						#endif
 					}
 				})
+				.textFieldStyle(PlainTextFieldStyle())
 				.padding(.top, 6)
 				.padding(.bottom, 4)
 				.padding([.leading,.trailing], 6)
 				
-				if self.isEditing {
+				if self.isEditing, !self.stationManager.hasNewStation {
 					Button(action: {
-						UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
 						self.isEditing = false
 						self.stationManager.hasNewStation = true
 						self.searchTerms = ""
 						self.stationManager.refreshStation(with: self.searchTerms){}
+						
+						#if os(macOS)
+						NSApplication.shared.keyWindow?.makeFirstResponder(nil)
+						#else
+						UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+						#endif
 					}) {
 						Image(systemName: "xmark.circle.fill").font(.body)
 					}
+					.buttonStyle(BorderlessButtonStyle())
 					.padding([.trailing], 8)
 					.foregroundColor(Color.primary)
 				}
@@ -83,9 +101,7 @@ struct DeparturesView: View {
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack {
-				if self.isEditing {
-					Spacer()
-				} else if self.stationManager.hasNewStation {
+				if self.stationManager.hasNewStation {
 					VStack(alignment: .center) {
 						Spacer()
 						
@@ -94,6 +110,8 @@ struct DeparturesView: View {
 						Spacer()
 					}
 					.padding([.top], geometry.safeAreaInsets.top)
+				} else if self.isEditing {
+					Spacer()
 				} else if self.stationManager.station == nil {
 					VStack(alignment: .center) {
 						Spacer()
@@ -105,17 +123,18 @@ struct DeparturesView: View {
 					}
 					.padding([.top], geometry.safeAreaInsets.top)
 				} else if !self.stationManager.station!.departures.isEmpty {
-					ScrollView(.vertical, showsIndicators: false) {
+					ScrollView(.vertical, showsIndicators: true) {
 						LazyVStack(alignment: .center) {
 							ForEach(self.stationManager.station!.departures, id: \.self) { departure in
 								DepartureView(departure: departure)
 								.frame(minWidth: 200, maxWidth: .infinity, minHeight: 44, idealHeight: 48, maxHeight: 88, alignment: .top)
 							}
 						}
-						.padding([.top], geometry.safeAreaInsets.top)
-						.padding([.top], 44)
 						.padding([.top])
+						.padding([.bottom], geometry.safeAreaInsets.bottom)
 					}
+					.padding([.top], geometry.safeAreaInsets.top)
+					.padding([.top], 42)
 			   } else {
 					VStack(alignment: .center) {
 						   Spacer()
@@ -139,14 +158,14 @@ struct DeparturesView: View {
 				}
 			}
 			.edgesIgnoringSafeArea(.top)
-			.accentColor(Color("Tint Color"))
+			.accentColor(Color("Accent Color"))
 			.background(Color("Dark Background Color"))
 			.edgesIgnoringSafeArea(.bottom)
 			.onReceive(timer) { (_) in
-				if !self.isEditing, !self.stationManager.hasNewStation {
+				/*if !self.isEditing, !self.stationManager.hasNewStation {
 					self.stationManager.refreshStation(with: self.searchTerms){
 					}
-				}
+				}*/
 			}
 		}
     }

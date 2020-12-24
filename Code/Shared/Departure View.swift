@@ -107,22 +107,22 @@ struct DeparturePreviews: PreviewProvider {
     static var previews: some View {
 		Group {
 			DepartureView(departure: Departure(of: "Train 1", with: .countryTrain, to: "Final Destination", at: Date(), with: 0, from: "A"))
-			.accentColor(Color("Tint Color"))
+			.accentColor(Color("Accent Color"))
 			.previewLayout(.fixed(width: 320, height: 44))
 			.environment(\.colorScheme, .light)
 			
 			DepartureView(departure: Departure(of: "Train 2", with: .countryTrain, to: "Final Destination", at: Date(), with: 3600, from: "B"))
-			.accentColor(Color("Tint Color"))
+			.accentColor(Color("Accent Color"))
 			.previewLayout(.fixed(width: 320, height: 44))
 			.environment(\.colorScheme, .light)
 			
 			DepartureView(departure: Departure(of: "Tram 3", with: .tram, to: "Final Destination", at: Date(), with: 7200, from: "C"))
-			.accentColor(Color("Tint Color"))
+			.accentColor(Color("Accent Color"))
 			.previewLayout(.fixed(width: 320, height: 44))
 			.environment(\.colorScheme, .dark)
 			
 			DepartureView(departure: Departure(of: "Tram 4", with: .tram, to: "Final Destination", at: Date()))
-			.accentColor(Color("Tint Color"))
+			.accentColor(Color("Accent Color"))
 			.previewLayout(.fixed(width: 320, height: 44))
 			.environment(\.colorScheme, .dark)
 		}

@@ -16,9 +16,17 @@ struct Main: App {
 	
 	/// The actual scene
 	@SceneBuilder var body: some Scene {
+		#if os(macOS)
+		WindowGroup {
+			DeparturesView(stationManager: stationManager)
+			.frame(minWidth: 250, idealWidth: 300, minHeight: 200, idealHeight: 500)
+		}
+		.windowStyle(HiddenTitleBarWindowStyle())
+		#else
 		WindowGroup {
 			DeparturesView(stationManager: stationManager)
 		}
+		#endif
 	}
 }
 
