@@ -38,8 +38,8 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 		// Setup the location manager
 		if CLLocationManager.locationServicesEnabled(), CLLocationManager.significantLocationChangeMonitoringAvailable() {
 			locationManager.delegate = self
-			locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-			locationManager.distanceFilter = 20
+			locationManager.desiredAccuracy = kCLLocationAccuracyBest
+			locationManager.distanceFilter = 10
 			locationManager.requestAlwaysAuthorization()
 			locationManager.startMonitoringSignificantLocationChanges()
 			
@@ -145,8 +145,8 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	/// - Parameter status: The authorization status
 	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
 		if CLLocationManager.locationServicesEnabled(), CLLocationManager.significantLocationChangeMonitoringAvailable(), status != .restricted, status != .denied {
-			locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-			locationManager.distanceFilter = 20
+			locationManager.desiredAccuracy = kCLLocationAccuracyBest
+			locationManager.distanceFilter = 10
 			locationManager.startMonitoringSignificantLocationChanges()
 			
 			if let currentCoordinate = locationManager.location?.coordinate {
