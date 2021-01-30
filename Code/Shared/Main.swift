@@ -19,7 +19,7 @@ struct Main: App {
 		#if os(macOS)
 		WindowGroup {
 			DeparturesView(stationManager: stationManager)
-			.frame(minWidth: 250, idealWidth: 300, minHeight: 200, idealHeight: 500)
+			.frame(minWidth: 300, idealWidth: 300, minHeight: 200, idealHeight: 500)
 		}
 		.windowStyle(HiddenTitleBarWindowStyle())
 		#else

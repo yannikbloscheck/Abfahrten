@@ -64,6 +64,7 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 			DispatchQueue.main.async {
 				self.hasNewStation = false
 				self.station = nil
+				
 				completion()
 			}
         }
@@ -83,6 +84,7 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 			DispatchQueue.main.async {
 				self.hasNewStation = false
 				self.station = nil
+				
 				completion()
 			}
         }
@@ -102,12 +104,14 @@ class StationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 				DispatchQueue.main.async {
 					self.hasNewStation = false
 					self.station = station
+					
 					completion()
 				}
             } else {
 				DispatchQueue.main.async {
 					self.hasNewStation = false
 					self.station = nil
+					
 					completion()
 				}
             }

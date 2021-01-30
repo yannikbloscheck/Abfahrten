@@ -91,7 +91,8 @@ struct DeparturesView: View {
 			}
 			.background(Color("Dark Background Color"))
 			.cornerRadius(6)
-			.padding(.all, 8)
+			.padding(.top, 4)
+			.padding([.bottom,.leading,.trailing], 8)
 		}
 	}
 	
@@ -101,53 +102,59 @@ struct DeparturesView: View {
 	var body: some View {
 		GeometryReader { geometry in
 			ZStack {
-				if self.stationManager.hasNewStation {
-					VStack(alignment: .center) {
+				Spacer()
+				.background(Color("Dark Background Color"))
+				.edgesIgnoringSafeArea(.bottom)
+				
+				VStack(spacing: 0) {
+					bar
+					.clipped()
+					.hidden()
+					
+					if self.stationManager.hasNewStation {
+						VStack(alignment: .center) {
+							Spacer()
+							
+							ProgressView().progressViewStyle(CircularProgressViewStyle())
+							
+							Spacer()
+						}
+					} else if self.isEditing {
 						Spacer()
-						
-						ProgressView().progressViewStyle(CircularProgressViewStyle())
-						
-						Spacer()
-					}
-					.padding([.top], geometry.safeAreaInsets.top)
-				} else if self.isEditing {
-					Spacer()
-				} else if self.stationManager.station == nil {
-					VStack(alignment: .center) {
-						Spacer()
-						
-						Text("NO_STATION")
-						.opacity(0.2)
-						
-						Spacer()
-					}
-					.padding([.top], geometry.safeAreaInsets.top)
-				} else if !self.stationManager.station!.departures.isEmpty {
-					ScrollView(.vertical, showsIndicators: true) {
-						LazyVStack(alignment: .center) {
-							ForEach(self.stationManager.station!.departures, id: \.self) { departure in
-								DepartureView(departure: departure)
-								.frame(minWidth: 200, maxWidth: .infinity, minHeight: 44, idealHeight: 48, maxHeight: 88, alignment: .top)
+					} else if self.stationManager.station == nil {
+						VStack(alignment: .center) {
+							Spacer()
+							
+							Text("NO_STATION")
+							.opacity(0.2)
+							
+							Spacer()
+						}
+					} else if !self.stationManager.station!.departures.isEmpty {
+						ScrollView(.vertical, showsIndicators: true) {
+							LazyVStack(alignment: .center) {
+								Spacer()
+								.frame(minHeight: 12, maxHeight: 12)
+								
+								ForEach(self.stationManager.station!.departures, id: \.self) { departure in
+									DepartureView(departure: departure)
+									.frame(minWidth: 200, maxWidth: .infinity, minHeight: 44, idealHeight: 48, maxHeight: 88, alignment: .top)
+								}
 							}
 						}
-						.padding([.top])
-						.padding([.bottom], geometry.safeAreaInsets.bottom)
-					}
-					.padding([.top], geometry.safeAreaInsets.top)
-					.padding([.top], 42)
-			   } else {
-					VStack(alignment: .center) {
+				   } else {
+						VStack(alignment: .center) {
 						   Spacer()
 						
 						   Text("NO_DEPARTURES")
-							   .opacity(0.2)
+							.opacity(0.2)
 						
 						   Spacer()
+						}
 					}
-					.padding([.top], geometry.safeAreaInsets.top)
-			    }
+				}
 				
-				VStack {
+				VStack(spacing: 0) {
 					bar
 					.padding([.top], geometry.safeAreaInsets.top)
 					.background(Color("Light Background Color"))
@@ -156,16 +163,14 @@ struct DeparturesView: View {
 					
 					Spacer()
 				}
+				.edgesIgnoringSafeArea(.top)
 			}
-			.edgesIgnoringSafeArea(.top)
 			.accentColor(Color("Accent Color"))
-			.background(Color("Dark Background Color"))
-			.edgesIgnoringSafeArea(.bottom)
 			.onReceive(timer) { (_) in
-				/*if !self.isEditing, !self.stationManager.hasNewStation {
+				if !self.isEditing, !self.stationManager.hasNewStation {
 					self.stationManager.refreshStation(with: self.searchTerms){
 					}
-				}*/
+				}
 			}
 		}
     }
