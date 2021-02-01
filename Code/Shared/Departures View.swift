@@ -136,7 +136,7 @@ struct DeparturesView: View {
 								Spacer()
 								.frame(minHeight: 12, maxHeight: 12)
 								
-								ForEach(self.stationManager.station!.departures, id: \.self) { departure in
+								ForEach(self.stationManager.station!.departures) { departure in
 									DepartureView(departure: departure)
 									.frame(minWidth: 200, maxWidth: .infinity, minHeight: 44, idealHeight: 48, maxHeight: 88, alignment: .top)
 								}

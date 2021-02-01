@@ -4,9 +4,14 @@ import Foundation
 /// A departure
 /// - Copyright: © Yannik Bloscheck - All rights reserved
 /// - Since: 2017-10-15
-struct Departure: Hashable, Codable {
+struct Departure: Identifiable, Hashable, Codable {
     // MARK: Properties
     
+	/// The id
+	let id: UUID = UUID()
+	
+	
+	
     /// The line that will depart
     let line: String
     
@@ -46,7 +51,7 @@ struct Departure: Hashable, Codable {
     /// - Parameter direction: A direction in which the line will depart
     /// - Parameter date: A date when the line will depart
     init(of line: String, with type: Type, to direction: String, at date: Date) {
-        self.line = line
+		self.line = line
         self.type = type
         self.direction = direction
         self.date = date
@@ -63,7 +68,7 @@ struct Departure: Hashable, Codable {
     /// - Parameter date: A date when the line will depart
     /// - Parameter platform: A platform where the line will depart from
     init(of line: String, with type: Type, to direction: String, at date: Date, from platform: String) {
-        self.line = line
+		self.line = line
         self.type = type
         self.direction = direction
         self.date = date
@@ -80,7 +85,7 @@ struct Departure: Hashable, Codable {
     /// - Parameter date: A date when the line will depart
     /// - Parameter delay: A delay with which the line will depart
     init(of line: String, with type: Type, to direction: String, at date: Date, with delay: Int) {
-        self.line = line
+		self.line = line
         self.type = type
         self.direction = direction
         self.date = date
@@ -98,11 +103,25 @@ struct Departure: Hashable, Codable {
     /// - Parameter delay: A delay with which the line will depart
     /// - Parameter platform: A platform where the line will depart from
     init(of line: String, with type: Type, to direction: String, at date: Date, with delay: Int, from platform: String) {
-        self.line = line
+		self.line = line
         self.type = type
         self.direction = direction
         self.date = date
         self.delay = delay
         self.platform = platform
     }
+	
+	
+	
+	
+	// MARK: Coding Keys
+ 
+	enum CodingKeys: CodingKey {
+		case line
+		case type
+		case direction
+		case date
+		case delay
+		case platform
+	}
 }
